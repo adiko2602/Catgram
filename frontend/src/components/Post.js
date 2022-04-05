@@ -18,10 +18,10 @@ function Post({ link, avatar, title, date, image, description }) {
                 image={image}
             />
             <CardContent>
-            <Typography variant="body1" color="text.primary">
+            <Typography variant="subtitle2" color="text.primary">
                 {description}
             </Typography>
-            <Typography variant="small" color="text.secondary">
+            <Typography variant="subtitle4" color="text.secondary">
                 {date}
             </Typography>
             </CardContent>

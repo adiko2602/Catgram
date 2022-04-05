@@ -2,6 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import Post from '../components/Post'
 import AvatarCustom from '../components/AvatarCustom';
+import Timeline from '../components/Timeline';
 import Friends from './Friends';
 
 function Posts() {
@@ -30,11 +31,11 @@ function Posts() {
                 <div key={user.id}>
                     <Post
                         link={user.website}
-                        avatar={<AvatarCustom name={user.username} />}
+                        avatar={<Timeline name={user.username} />}
                         title="My new kitty!"
                         date="15 HOURS AGO"
                         image="https://i.imgur.com/1sBQlcy.jpeg"
-                        description="She's soooo small and cute"
+                        description="Look at her!"
                     />
                 </div>
             ))}

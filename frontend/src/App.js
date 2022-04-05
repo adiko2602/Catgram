@@ -17,8 +17,11 @@ const theme = createMuiTheme({
     
   },
   typography: {
-    small: {
+    subtitle3: {
       fontSize: 12,
+    },
+    subtitle4: {
+      fontSize: 10,
     },
     fontFamily: 'Quicksand',
     fontWeightLight: 400,
