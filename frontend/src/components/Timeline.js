@@ -5,7 +5,7 @@ function Timeline({ name }) {
     return (
         <Box display="flex" justifyContent="center" alignItems="center" flexDirection= "center">
             <Avatar>{name[0]}</Avatar>
-            <Typography variant="small"  type="body2" color="text.secondary" style={{color: 'black', textOverflow: 'ellipsis', marginLeft: '10px', marginRight: '0px'}}>{name}</Typography>
+            <Typography type="body2" color="text.secondary" style={{color: 'black', textOverflow: 'ellipsis', marginLeft: '10px', marginRight: '0px'}}>{name}</Typography>
         </Box>
     );
 }
