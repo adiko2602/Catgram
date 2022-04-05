@@ -46,13 +46,13 @@ function Add() {
     }, [image]);
 
     return (
-        <Card style={{ width: '600px', marginTop: '20px' }} elevation={5}>
+        <Card style={{width: '614px', marginTop: '20px' }} elevation={5}>
             <CardHeader
-                title="Add photography"
+                title="Create new post"
             />
             <CardMedia
                 component="img"
-                height={preview ? "300" : "0"}
+                height={preview ? "700" : "0"}
                 image={preview}
             />
             <CardContent>
@@ -115,10 +115,10 @@ function Add() {
                         {preview ? (
                             <Button
                                 style={{ marginTop: '10px', color: 'black' }}
-                                type="submit"
+                                type="share"
                                 variant="text"
                                 endIcon={<SendOutlinedIcon />}>
-                                Submit
+                                Share
                             </Button>
                         ) : (null)}
                     </Box>
@@ -127,5 +127,4 @@ function Add() {
         </Card>
     );
 }
-
 export default Add;

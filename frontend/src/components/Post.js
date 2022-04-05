@@ -28,5 +28,4 @@ function Post({ link, avatar, title, date, image, description }) {
         </Card>
     );
 }
-
 export default Post;

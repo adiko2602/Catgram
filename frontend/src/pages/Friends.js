@@ -23,5 +23,4 @@ function Friends({ users }) {
         </Paper>
     );
 }
-
 export default Friends;

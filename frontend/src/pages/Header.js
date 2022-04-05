@@ -14,7 +14,9 @@ function Header() {
                     direction="row"
                     justifyContent="flex-start"
                 >
-                    <ButtonCustom link="/" variant="h5" name="Catagram"/>
+                    <a href="/">
+                    <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{height: '38px', justifyContent: 'flex-start', marginLeft: '472px', direction: 'row', }}/>
+                    </a>
                 </Grid>
                 <Grid
                     container
@@ -29,6 +31,4 @@ function Header() {
         </AppBar>
     );
 }
-
 export default Header;
-//

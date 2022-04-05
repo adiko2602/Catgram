@@ -1,7 +1,6 @@
 import * as React from 'react'
 import axios from 'axios'
 import Post from '../components/Post'
-import AvatarCustom from '../components/AvatarCustom';
 import Timeline from '../components/Timeline';
 import Friends from './Friends';
 
@@ -44,4 +43,3 @@ function Posts() {
 }
 
 export default Posts;
-// test
