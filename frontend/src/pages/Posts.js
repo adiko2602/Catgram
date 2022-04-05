@@ -31,10 +31,10 @@ function Posts() {
                     <Post
                         link={user.website}
                         avatar={<AvatarCustom name={user.username} />}
-                        title=""
-                        date="Data chyba tutaj"
-                        image=""
-                        description="Yes first photo of my cat. It is buety. "
+                        title="My new kitty!"
+                        date="15 HOURS AGO"
+                        image="https://i.imgur.com/1sBQlcy.jpeg"
+                        description="She's soooo small and cute"
                     />
                 </div>
             ))}

@@ -14,7 +14,7 @@ function Header() {
                     direction="row"
                     justifyContent="flex-start"
                 >
-                    <Typography variant="h5">Catgram</Typography>
+                    <ButtonCustom link="/" variant="h5" name="Catagram"/>
                 </Grid>
                 <Grid
                     container

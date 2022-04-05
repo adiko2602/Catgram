@@ -14,9 +14,13 @@ const theme = createMuiTheme({
     secondary: {
       main: grey[800],
     },
+    
   },
   typography: {
-    fontFamily: 'Comfortaa',
+    small: {
+      fontSize: 12,
+    },
+    fontFamily: 'Quicksand',
     fontWeightLight: 400,
     fontWeightRegular: 500,
     fontWeightMedium: 600,

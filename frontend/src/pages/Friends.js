@@ -4,7 +4,7 @@ import AvatarCustom from '../components/AvatarCustom'
 
 function Friends({ users }) {
     return (
-        <Paper style={{ width: '600px', marginTop: '20px' }} elevation='5' >
+        <Paper style={{ width: '614px', marginTop: '20px' }} elevation='5' >
             <Box
                 display="flex"
                 justifyContent="flex-start"
@@ -14,7 +14,7 @@ function Friends({ users }) {
             >
                 {users.map(user => (
                     <div key={user.id}>
-                        <Link href={user.website} underline="none" style={{ color: 'black' }}>
+                        <Link href={user.website} underline="none" style={{ color: 'white' }}>
                             <AvatarCustom name={user.username} />
                         </Link>
                     </div>

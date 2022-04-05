@@ -3,7 +3,7 @@ import { Link, Card, CardHeader, CardMedia, CardContent, Typography } from '@mui
 
 function Post({ link, avatar, title, date, image, description }) {
     return (
-        <Card style={{ width: '600px', marginTop: '20px' }} elevation={5}>
+        <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
             <CardHeader
                 avatar={
                     <Link href={link} underline="none" style={{ color: 'black' }}>
@@ -11,17 +11,19 @@ function Post({ link, avatar, title, date, image, description }) {
                     </Link>
                     }
                 title={title}
-                subheader={date}
             />
             <CardMedia
                 component="img"
-                height="300"
+                height="" //500?
                 image={image}
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    {description}
-                </Typography>
+            <Typography variant="body1" color="text.primary">
+                {description}
+            </Typography>
+            <Typography variant="small" color="text.secondary">
+                {date}
+            </Typography>
             </CardContent>
         </Card>
     );
