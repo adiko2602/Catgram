@@ -6,3 +6,16 @@ body {
   position: relative;
   font-family: 'Quicksand';
 }
+
+.search-box {
+  height: 10px;
+  width: 100px;
+}
+
+.search-box input {
+  height: 100px;
+  width: 100px;
+  border: 1px solid rgba(158, 158, 158, 0.493);
+  outline: none;
+  padding-left: 10px;
+}

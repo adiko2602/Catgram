@@ -17,6 +17,9 @@ function Header() {
                     <a href="/">
                     <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{height: '38px', justifyContent: 'flex-start', marginLeft: '472px', direction: 'row', }}/>
                     </a>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search" style={{height: '35px', width: '250px', justifyContent: 'flex-start', marginLeft: '250px', direction: 'row', }}/>
+                    </div>
                 </Grid>
                 <Grid
                     container

@@ -6,6 +6,7 @@ import Posts from './pages/Posts'
 import Add from './pages/Add'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+
 const theme = createMuiTheme({
   palette: {
     primary: {
