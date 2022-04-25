@@ -1,41 +1,44 @@
 import * as React from 'react'
-import axios from 'axios'
 import Post from '../components/Post'
 import Timeline from '../components/Timeline';
 import Friends from './Friends';
+import axios from 'axios'
+import { useState, useEffect } from "react";
 
 function Posts() {
-    const [users, setUsers] = React.useState([]);
-    const [photos, setPhotos] = React.useState([]);
+    const [posts, getPosts] = useState([]);
 
-    React.useEffect(async () => {
-        await Promise.all([
-            axios.get("https://jsonplaceholder.typicode.com/users/"),
-            axios.get("https://jsonplaceholder.typicode.com/photos")
-        ])
-        .then(response => {
-            console.log(response[0].data);
-            setUsers(response[0].data);
-            setPhotos(response[1].data)
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    const apiPost = 'https://localhost:7045/api/Post'
+  
+    const getAllPosts = async () => {
+      await axios.get(apiPost)
+      .then((response) => {
+        let dataRes = response.data;
+        console.log(dataRes)
+        getPosts(dataRes);
+      })
+      .catch(error => console.error('Error'));
+    }
+  
+    useEffect(() => {
+      getAllPosts();
     }, []);
 
     return (
         <div>   
-        <Friends users={users}/>
-            {users.map(user => (
-                <div key={user.id}>
+        {//<Friends posts={posts}/>
+}
+            {posts.map(post => (
+                <div key={post.id}>
                     <Post
-                        link={user.website}
-                        avatar={<Timeline name={user.username} />}
-                        title="My new kitty!"
-                        date="15 HOURS AGO"
-                        image="https://i.imgur.com/1sBQlcy.jpeg"
-                        description="Look at her!"
+                        link={post.link}
+                        avatar={<Timeline name={post.title} />}
+                        title={post.title}
+                        image={post.picture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
+                        description={post.description}
                     />
+                    
+                    { console.log(post.picture) }
                 </div>
             ))}
         </div>

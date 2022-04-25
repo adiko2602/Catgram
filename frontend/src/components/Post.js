@@ -14,7 +14,7 @@ function Post({ link, avatar, title, date, image, description }) {
             />
             <CardMedia
                 component="img"
-                height="" //500?
+                height="500"
                 image={image}
             />
             <CardContent>

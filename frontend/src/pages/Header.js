@@ -14,9 +14,7 @@ function Header() {
                     direction="row"
                     justifyContent="flex-start"
                 >
-                    <a href="/">
-                    <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{height: '38px', justifyContent: 'flex-start', marginLeft: '472px', direction: 'row', }}/>
-                    </a>
+                    <Typography variant="h5">Catgram</Typography>
                 </Grid>
                 <Grid
                     container
@@ -31,4 +29,5 @@ function Header() {
         </AppBar>
     );
 }
+
 export default Header;
