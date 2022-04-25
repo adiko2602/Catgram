@@ -15,16 +15,9 @@ const theme = createMuiTheme({
     secondary: {
       main: grey[800],
     },
-    
   },
   typography: {
-    subtitle3: {
-      fontSize: 12,
-    },
-    subtitle4: {
-      fontSize: 10,
-    },
-    fontFamily: 'Quicksand',
+    fontFamily: 'Comfortaa',
     fontWeightLight: 400,
     fontWeightRegular: 500,
     fontWeightMedium: 600,
@@ -57,6 +50,9 @@ function App() {
         </Switch>
       </Router>
     </ThemeProvider>
+
+
+
   );
 }
 

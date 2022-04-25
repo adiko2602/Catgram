@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using catgramAPI.Models;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace catgramAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+
     public class PostController : ControllerBase
     {
         private readonly DataContext _context;
+        private int _id;
         public PostController(DataContext context)
         {
             _context = context;
@@ -20,6 +24,8 @@ namespace catgramAPI.Controllers
             return Ok(await _context.Posts.ToListAsync());
         }
 
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -30,13 +36,59 @@ namespace catgramAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPost(Post newPost)
+        public async Task<IActionResult> AddFile([FromForm] FileUpload file)
         {
-            _context.Posts.Add(newPost);
-            await _context.SaveChangesAsync();
+            Console.WriteLine("Upload");
+            try
+            {
+                Post newPost = new Post();
+                newPost.title = file.title;
+                newPost.description = file.description;
 
-            return Ok(await _context.Posts.ToListAsync());
+                Console.WriteLine("FileUploaded");
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", file.FileName);
+                path = Regex.Replace(path, @"\\", "/");
+                using Stream stream = new FileStream(path, FileMode.Create);
+                {
+                    file.FormFile.CopyTo(stream);
+                }
+
+                newPost.id = 0;
+                newPost.picture = path;
+                newPost.link = "";
+
+                Console.WriteLine(newPost.title);
+
+
+                _context.Posts.Add(newPost);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return NotFound();
+            }
+
+            return Ok();
         }
+
+/*        [HttpPost]
+            public async Task<IActionResult> AddPost(Post newPost) 
+            {
+                Console.WriteLine("Hello from console 1");
+                Console.WriteLine(newPost.title);
+                Console.WriteLine(newPost.description);
+                Console.WriteLine(newPost.picture);
+                Console.WriteLine(newPost.link);
+                Console.WriteLine(newPost.id);
+                _context.Posts.Add(newPost);
+                await _context.SaveChangesAsync();
+                _id = newPost.id;
+                
+
+                return Ok();
+                //return Ok(await _context.Posts.ToListAsync());
+            }*/
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(int id, Post updatedPost)

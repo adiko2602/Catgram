@@ -3,6 +3,7 @@
     public class Post
     {
             public int id { get; set; }
+            public string link { get; set; }
 
             public string title { get; set; }
 
