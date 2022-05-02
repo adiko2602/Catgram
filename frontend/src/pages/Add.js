@@ -5,6 +5,7 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ButtonCustom from '../components/ButtonCustom'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import axios from 'axios';
+import Header from './Header'
 
 function Add() {
 
@@ -205,6 +206,8 @@ function Add() {
 
     if (!uploadedOk) {
         return (
+            <>
+            <Header />
             <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
                 <CardHeader
                     title="Create new post"
@@ -280,9 +283,12 @@ function Add() {
                     </form>
                 </CardContent>
             </Card>
+            </>
         );
     } else {
         return (
+            <>
+            <Header />
             <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
                 <CardHeader
                     title="New post was created"
@@ -291,6 +297,7 @@ function Add() {
                     <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
                 </CardContent>
             </Card>
+            </>
         );
     }
 }

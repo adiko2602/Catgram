@@ -8,7 +8,10 @@ import Start from './pages/Start'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ContactUs from './pages/ContactUs'
+import Profile from './pages/Profile'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useState } from 'react'
+
 
 
 const theme = createMuiTheme({
@@ -30,42 +33,36 @@ const theme = createMuiTheme({
 })
 
 function App() {
+
+  const [userLogin, setUserLogin] = useState(true);
+  console.log(userLogin)
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-        <Route path="/start">
-          <Start />
-          </Route>
-          <Route path="/login">
-          <Login />
-          </Route>
-          <Route path="/sign-up">
-          <SignUp />
-          </Route>
-          <Route path="/contact-us">
-          <ContactUs />
-          </Route>
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Header />
-            <Grid item xs={3}>
-              <Route exact path="/">
-                <Posts />
-              </Route>
-              <Route path="/add">
-                <Add />
-              </Route>
-            </Grid>
-          </Grid>
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              { userLogin ? <Posts /> : <Start /> }
+            </Route>
+            <Route path="/login">
+              { userLogin ? <Posts /> : <Login /> }
+            </Route>
+            <Route path="/sign-up">
+              { userLogin ? <Posts /> : <SignUp /> }
+            </Route>
+            <Route path="/contact-us">
+              <ContactUs />
+            </Route>
+            <Route path="/add">
+              { userLogin ? <Add /> : <Login /> }
+            </Route>
+            <Route path="/profile">
+              { userLogin ? <Profile /> : <Login /> }
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </>
   )
 }
 

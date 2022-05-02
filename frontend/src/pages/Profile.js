@@ -6,7 +6,7 @@ import axios from 'axios'
 import Header from './Header';
 import { useState, useEffect } from "react";
 
-function Posts() {
+function Profile() {
     const [posts, getPosts] = useState([]);
 
     const apiPost = 'https://localhost:7045/api/Post'
@@ -45,4 +45,4 @@ function Posts() {
     );
 }
 
-export default Posts;
+export default Profile;
