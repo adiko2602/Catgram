@@ -62,28 +62,6 @@ function Add() {
         }
 
         if (title && description) {
-            // const post = JSON.stringify({
-            //     description: description,
-            //     id: 0,
-            //     link: '',
-            //     picture: '',
-            //     title: title
-            // })
-
-            // console.log(post);
-
-            // try {
-            //     const res = await axios.post(apiPost, post, {
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         }
-            //     })
-            // } catch (ex) {
-            //     console.log(ex);
-            // }
-
-            // uploadFile();
-
             const formData = new FormData();
 
             formData.append("formFile", file);
@@ -100,109 +78,7 @@ function Add() {
                 console.log(ex);
             }
         }
-
     }
-    // const [image, setImage] = useState();
-    // const [fileName, setFileName] = useState();
-    // const [preview, setPreview] = useState();
-    // const [title, setTitle] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [titleError, setTitleError] = useState(false);
-    // const [descriptionError, setDescriptionError] = useState(false);
-
-    // const fileInputRef = useRef();
-
-    // const saveFile = async (event) => {
-    //     setImage(event.target.files[0]);
-    //     setFileName(event.target.files[0].name);
-
-    //     console.log(image.name)
-    //     //if (image && image.type.substring(0, 5) === "image") {
-    //         const formData = new FormData();
-
-    //         formData.append("formFile", image);
-    //         formData.append("fileName", fileName);
-    //         try {
-    //             await axios.post(apiUpload, formData)
-    //         } catch(error) {
-    //             console.error("upload error!", error)
-    //         }
-    //     //} else {
-    //     //    setImage(null);
-    //     //}
-    // }
-
-    // const uploadFile = async (e) => {
-    //     const formData = new FormData();
-    //     formData.append("formFile", image);
-
-    //     await axios.post(apiUpload, formData)
-    //     .catch(error => {
-    //         console.error("upload error!", error)
-    //     })
-    // }
-
-    //const handleSubmit = (event) => {
-    // event.preventDefault()
-    // setTitleError(false)
-    // setDescriptionError(false)
-
-    // if (title === '') {
-    //     setTitleError(true)
-    // }
-    // if (description === '') {
-    //     setDescriptionError(true)
-    // }
-
-    // if(title && description) {
-    //     let post = JSON.stringify({ 
-    //         description: description,
-    //         id: 0,
-    //         link: '',
-    //         picture: '',
-    //         title: title
-    //     })
-
-    //     console.log(post);
-
-    //     axios.post(apiPost, post, {
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         }
-    //       })
-    //     .catch(error => {
-    //         console.error('There was an error!', error);
-    //     });
-
-    // }
-
-    // const article = { title: 'React POST Request Example' };
-    // axios.post('https://reqres.in/invalid-url', article)
-    //     .then(response => this.setState({ articleId: response.data.id }))
-    //     .catch(error => {
-    //         this.setState({ errorMessage: error.message });
-    //         console.error('There was an error!', error);
-    //     });
-    // // if (title && details) {
-    // //     fetch('http://localhost:8000/notes', {
-    // //         method: 'POST',
-    // //         headers: { "Content-type": "application/json" },
-    // //         body: JSON.stringify({ title, details, category })
-    // //     }).then(() => history.push('/'))
-    // // }
-    //}
-
-    // useEffect(() => {
-    //     if (image) {
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => {
-    //             setPreview(reader.result);
-    //         }
-    //         reader.readAsDataURL(image);
-    //     } else {
-    //         setPreview(null);
-    //     }
-    // }, [image]);
 
     if (!uploadedOk) {
         return (
