@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using catgramAPI.Dtos;
 using catgramAPI.Models;
-using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace catgramAPI.Controllers
 {
+    [ApiController]
     [Authorize]
     [Route("[controller]")]
     public class UsersController : Controller
@@ -21,7 +21,6 @@ namespace catgramAPI.Controllers
             IUserService userService,
             IConfiguration configuration)
         {
-            Console.WriteLine(configuration);
             _userService = userService;
             _configuration = configuration;
         }
@@ -80,14 +79,6 @@ namespace catgramAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-        [HttpGet("data")]
-        public IActionResult GetData()
-        {
-            return Ok("Siema mordo");
-        }
-
 
         [HttpGet("{id}")]
         public IActionResult GetId(int id)

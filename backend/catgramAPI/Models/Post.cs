@@ -2,14 +2,12 @@
 {
     public class Post
     {
-            public int id { get; set; }
-            public string link { get; set; }
+        public int Id { get; set; }
+        public string LinkPicture { get; set; }
 
-            public string title { get; set; }
+        public string Title { get; set; }
 
-            public string picture { get; set; }
+        public string Description { get; set; }
 
-            public string description { get; set; }
-  
     }
 }
