@@ -15,9 +15,12 @@ namespace catgramAPI.Controllers
     public class PostsController : ControllerBase
     {
         private IPostService _postService;
-        public PostsController(IPostService postService)
+        private ICommentService _commentService;
+        public PostsController(IPostService postService, ICommentService commentService)
         {
             _postService = postService;
+            _commentService = commentService;
+
         }
 
 
@@ -62,7 +65,7 @@ namespace catgramAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] PostDto postDto)
+        public IActionResult Update(int id, [FromBody]PostDto postDto)
         {
             var post = new Post
             {
@@ -94,6 +97,22 @@ namespace catgramAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost("{id}/comment/add")]
+        public IActionResult CommentAdd(int id, CommentDto commentDto)
+        {
+            if (string.IsNullOrEmpty(commentDto.Com))
+                return BadRequest();
+
+            Comment comment = new Comment()
+            {
+                PostId = id,
+                Com = commentDto.Com
+            };
+
+            _commentService.Add(comment);
+            return Ok();
         }
     }
 }
