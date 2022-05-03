@@ -46,7 +46,7 @@ namespace catgramAPI.Controllers
                 newPost.description = file.description;
 
                 Console.WriteLine("FileUploaded");
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", file.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", file.fileName);
                 path = Regex.Replace(path, @"\\", "/");
                 using Stream stream = new FileStream(path, FileMode.Create);
                 {
