@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public string Secret { get; set; } = "HelloMadaFakaXdWypad";
+        public string Secret { get; set; }
     }
 }

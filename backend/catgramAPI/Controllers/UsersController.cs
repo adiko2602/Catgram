@@ -14,15 +14,16 @@ namespace catgramAPI.Controllers
     [Route("[controller]")]
     public class UsersController : Controller
     {
+        private IConfiguration _configuration;
         private IUserService _userService;
-        private readonly AppSettings _appSettings;
 
         public UsersController(
             IUserService userService,
-            IOptions<AppSettings> appSettings)
+            IConfiguration configuration)
         {
+            Console.WriteLine(configuration);
             _userService = userService;
-            _appSettings = appSettings.Value;
+            _configuration = configuration;
         }
 
         [AllowAnonymous]
@@ -34,7 +35,13 @@ namespace catgramAPI.Controllers
                 return BadRequest("Wrong username or password");
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
+            var appSettingsSection = _configuration.GetSection("appSettings");
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            Console.WriteLine(_configuration.GetSection("appSettings").Exists());
+            Console.WriteLine(appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -73,6 +80,14 @@ namespace catgramAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("data")]
+        public IActionResult GetData()
+        {
+            return Ok("Siema mordo");
+        }
+
 
         [HttpGet("{id}")]
         public IActionResult GetId(int id)
