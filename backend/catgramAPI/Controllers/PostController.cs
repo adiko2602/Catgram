@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Authorization;
 namespace catgramAPI.Controllers
 {
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     [Route("[controller]")]
-    public class PostsController : ControllerBase
+    public class PostController : ControllerBase
     {
         private IPostService _postService;
         private ICommentService _commentService;
-        public PostsController(IPostService postService, ICommentService commentService)
+        public PostController(IPostService postService, ICommentService commentService)
         {
             _postService = postService;
             _commentService = commentService;
@@ -55,6 +55,7 @@ namespace catgramAPI.Controllers
             }
             Post post = new Post()
             {
+                UserId = postDto.UserId,
                 Title = postDto.Title,
                 Description = postDto.Description,
                 LinkPicture = path
@@ -65,18 +66,24 @@ namespace catgramAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]PostDto postDto)
+        public IActionResult Update(int id, [FromBody]UpdatePostDto updatePostDto)
         {
-            var post = new Post
+            var post = _postService.GetId(id);
+            if (post == null)
+                return BadRequest();
+
+            var updatePost = new Post
             {
                 Id = id,
-                Title = postDto.Title,
-                Description = postDto.Description
+                UserId = post.UserId,
+                LinkPicture = post.LinkPicture,
+                Title = updatePostDto.Title,
+                Description = updatePostDto.Description
             };
 
             try
             {
-                _postService.Update(post);
+                _postService.Update(updatePost);
                 return Ok();
             }
             catch (Exception ex)
@@ -90,6 +97,7 @@ namespace catgramAPI.Controllers
         {
             try
             {
+                _commentService.DeleteByPostId(id);
                 _postService.Delete(id);
                 return Ok();
             }
@@ -99,20 +107,40 @@ namespace catgramAPI.Controllers
             }
         }
 
-        [HttpPost("{id}/comment/add")]
-        public IActionResult CommentAdd(int id, CommentDto commentDto)
+        [HttpPost("{postId}/comment/add")]
+        public IActionResult CommentAdd(int postId, CommentDto commentDto)
         {
             if (string.IsNullOrEmpty(commentDto.Com))
                 return BadRequest();
 
             Comment comment = new Comment()
             {
-                PostId = id,
+                PostId = postId,
                 Com = commentDto.Com
             };
 
-            _commentService.Add(comment);
-            return Ok();
+            return Ok(_commentService.Add(comment));
+        }
+
+        [HttpPost("{postId}/comment/")]
+        public IActionResult CommentGet(int postId)
+        {
+            var comments = _commentService.GetByPostId(postId);
+            return Ok(comments);
+        }
+
+        [HttpDelete("{postId}/comment/{id}")]
+        public IActionResult CommentDeleteId(int id)
+        {
+            try
+            {
+                _commentService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

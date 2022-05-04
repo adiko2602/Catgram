@@ -69,6 +69,9 @@ if (app.Environment.IsDevelopment())
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials());*/
+app.UseCors(x => x.AllowAnyHeader()
+      .AllowAnyMethod()
+      .WithOrigins("https://localhost:3000"));
 
 app.UseAuthentication();
 app.UseRouting();

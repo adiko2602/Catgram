@@ -12,12 +12,12 @@ namespace catgramAPI.Controllers
     [ApiController]
     [Authorize]
     [Route("[controller]")]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         private IConfiguration _configuration;
         private IUserService _userService;
 
-        public UsersController(
+        public UserController(
             IUserService userService,
             IConfiguration configuration)
         {
@@ -26,7 +26,7 @@ namespace catgramAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("auth/login")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
@@ -62,7 +62,7 @@ namespace catgramAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost("auth/register")]
         public IActionResult Register([FromBody]UserDto userDto)
         {
             var user = new User
