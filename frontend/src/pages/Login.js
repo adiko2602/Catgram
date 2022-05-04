@@ -5,22 +5,56 @@ import ButtonCustom from '../components/ButtonCustom'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+import axios from 'axios';
+
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
 
 export default function Login() {
-   
+
+    const apiLogin = 'https://localhost:7045/User/auth/login'
     const history = useHistory();
   
-    const [emailAddress, setEmailAddress] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [userLogged, setUserLogged] = useState();
+    const [userToken, setUserToken] = useState('');
+    const [userId, setUserId] = useState();
+    const [userUsername, setUserUsername] = useState('');
   
     const [error, setError] = useState('');
-    const isInvalid = password === '' || emailAddress === '';
+    const isInvalid = username === '' || password === '';
   
     const handleLogin = async (event) => {
       event.preventDefault();
+
+      await axios.post(apiLogin, {
+        "id": 0,
+        "username": username,
+        "password": password
+      })
+
+      .then(function (response) {
+        const res = response.data;
+        if(!res.id || !res.token || !res.username) {
+          setError("Error with response from server.");
+          return;
+        }
+        setUserId(res.id);
+        setUserToken(res.token);
+        setUserUsername(res.username);
+
+        console.log(userUsername);
+        console.log(userToken);
+        console.log(userId);
+
+        
+        setUserLogged(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
     
       return (
@@ -58,14 +92,19 @@ export default function Login() {
 
           {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
+          {userLogged ? (
+            <>
+            <div>Logged success</div>
+            </>
+          ) : (
           <form onSubmit={handleLogin} method="POST">
             <input
               aria-label="Enter your email address"
               type="text"
               placeholder="Email address"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              onChange={({ target }) => setEmailAddress(target.value)}
-              value={emailAddress}
+              onChange={({ target }) => setUsername(target.value)}
+              value={username}
             />
             <input
               aria-label="Enter your password"
@@ -82,6 +121,7 @@ export default function Login() {
               Login
             </button>
           </form>
+          )}
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">
