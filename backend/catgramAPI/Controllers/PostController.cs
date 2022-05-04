@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace catgramAPI.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class PostController : ControllerBase
     {
@@ -122,7 +122,7 @@ namespace catgramAPI.Controllers
             return Ok(_commentService.Add(comment));
         }
 
-        [HttpPost("{postId}/comment/")]
+        [HttpGet("{postId}/comment/")]
         public IActionResult CommentGet(int postId)
         {
             var comments = _commentService.GetByPostId(postId);
