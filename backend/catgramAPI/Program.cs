@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddControllers();
-builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
@@ -19,6 +18,18 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+        });
+});
 
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -69,10 +80,8 @@ if (app.Environment.IsDevelopment())
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials());*/
-app.UseCors(x => x.AllowAnyHeader()
-      .AllowAnyMethod()
-      .WithOrigins("https://localhost:3000"));
 
+app.UseCors();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
