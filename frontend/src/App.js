@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ContactUs from './pages/ContactUs'
 import Profile from './pages/Profile'
+import NotFound from './pages/not-found'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import React, { Component } from 'react'
 import authService from "./services/auth-service";
@@ -69,6 +70,7 @@ export default class App extends Component {
             <Route path="/posts">
               {!this.state.loggedIn ? <Redirect to="/" /> : <Posts />}
             </Route>
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </ThemeProvider>
