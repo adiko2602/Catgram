@@ -9,8 +9,9 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ContactUs from './pages/ContactUs'
 import Profile from './pages/Profile'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import React, { Component } from 'react'
+import authService from "./services/auth-service";
 
 
 
@@ -32,38 +33,43 @@ const theme = createMuiTheme({
   }
 })
 
-function App() {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: authService.loggedIn()
+    };
+    console.log(this.state.loggedIn);
+  }
 
-  const [userLogin, setUserLogin] = useState(false);
-  console.log(userLogin)
-  return (
-    <>
+  render() {
+    return(
+      <>
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
             <Route exact path="/">
-              { userLogin ? <Posts /> : <Start /> }
+              {this.state.loggedIn ? <Redirect to="/profile" /> : <Start />}
             </Route>
             <Route path="/login">
-              { userLogin ? <Posts /> : <Login /> }
+              {this.state.loggedIn ? <Redirect to="/profile" /> : <Login />}
             </Route>
             <Route path="/sign-up">
-              { userLogin ? <Posts /> : <SignUp /> }
+              {this.state.loggedIn ? <Redirect to="/" /> : <SignUp />}
             </Route>
             <Route path="/contact-us">
               <ContactUs />
             </Route>
             <Route path="/add">
-              { userLogin ? <Add /> : <Login /> }
+              {!this.state.loggedIn ? <Redirect to="/login" /> : <Add />}
             </Route>
             <Route path="/profile">
-              { userLogin ? <Profile /> : <Login /> }
+              {!this.state.loggedIn ? <Redirect to="/" /> : <Profile />}
             </Route>
           </Switch>
         </Router>
       </ThemeProvider>
     </>
-  )
+    );
+  }
 }
-
-export default App

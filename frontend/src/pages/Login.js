@@ -8,6 +8,8 @@ import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import axios from 'axios';
 import authService from '../services/auth-service';
 import { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+
 
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
@@ -50,7 +52,6 @@ export default class Login extends Component {
       this.state.username, 
       this.state.password).then(
       () => {
-        //this.props.history.push("/");
         window.location.reload();
       },
       error => {
