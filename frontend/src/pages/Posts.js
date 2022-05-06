@@ -4,45 +4,56 @@ import Timeline from '../components/Timeline';
 import Friends from './Friends';
 import axios from 'axios'
 import Header from './Header';
-import { useState, useEffect } from "react";
+import { useState, useEffect, Component } from "react";
+import postService from '../services/post-service';
 
-function Posts() {
-    const [posts, getPosts] = useState([]);
+export default class Posts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      message: ""
+    };
+  }
 
-    const apiPost = 'https://localhost:7045/api/Post'
-  
-    const getAllPosts = async () => {
-      await axios.get(apiPost)
-      .then((response) => {
-        let dataRes = response.data;
-        console.log(dataRes)
-        getPosts(dataRes);
-      })
-      .catch(error => console.error('Error'));
-    }
-  
-    useEffect(() => {
-      getAllPosts();
-    }, []);
-
-    return (
-        <div>   
-        <Header />
-            {posts.map(post => (
-                <div key={post.id}>
-                    <Post
-                        link={post.link}
-                        avatar={<Timeline name={post.title} />}
-                        title={post.title}
-                        image={post.picture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
-                        description={post.description}
-                    />
-                    
-                    { console.log(post.picture) }
-                </div>
-            ))}
-        </div>
+  componentDidMount() {
+    postService.getPosts().then(
+      response => {
+        this.setState({
+          posts: response.data
+        });
+      },
+      error => {
+        const resMessage = (
+          error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+          error.message ||
+          error.toString();
+        this.setState({
+          message: resMessage
+        });
+      }
     );
-}
+  }
 
-export default Posts;
+  render() {
+    console.log(this.state.posts);
+    return (
+      <div>
+        <Header />
+        {this.state.posts.map(post => (
+          <div key={post.id}>
+            <Post
+              //link={post.link}
+              avatar={<Timeline name={post.title} />}
+              title={post.title}
+              picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
+              description={post.description}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+}

@@ -22,6 +22,13 @@ class postService {
         );
     }
 
+    getPosts() {
+        const user = authService.getCurrentUser();
+        const userId = user.id;
+
+        return axios.get(apiUrl + "/Post");
+    }
+
     // logout() {
     //     localStorage.removeItem("user");
     // }

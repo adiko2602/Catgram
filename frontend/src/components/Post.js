@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link, Card, CardHeader, CardMedia, CardContent, Typography } from '@mui/material'
 
-function Post({ link, avatar, title, date, image, description }) {
+function Post({ link, avatar, title, date, picture, description }) {
     return (
         <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
             <CardHeader
@@ -15,7 +15,7 @@ function Post({ link, avatar, title, date, image, description }) {
             <CardMedia
                 component="img"
                 height="500"
-                image={image}
+                image={picture}
             />
             <CardContent>
             <Typography variant="subtitle2" color="text.primary">
