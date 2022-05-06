@@ -24,8 +24,9 @@ export default class Add extends Component {
             description: "",
             titleError: false,
             descriptionError: false,
-            fileError: true,
+            fileError: false,
             uploadError: true,
+            fileSubmitError: true,
             message: ""
         }
 
@@ -54,7 +55,7 @@ export default class Add extends Component {
         this.setState({
             file: e.target.files[0],
             fileName: e.target.files[0].name,
-            fileError: false
+            fileSubmitError: false
         });
     }
 
@@ -129,9 +130,12 @@ export default class Add extends Component {
                             <form noValidate autoComplete="off" onSubmit={this.handleCreatePost}>
 
 
-                                {this.state.fileError && (
+                                {this.state.fileSubmitError && (
                                     <Button
-                                        style={{ color: 'black' }}
+                                        style={{ 
+                                            color: this.state.fileError ? '#d32f2f' : 'black',
+                                            borderColor: this.state.fileError ? '#d32f2f' : 'black' 
+                                        }}
                                         variant="text"
                                         startIcon={<AddPhotoAlternateOutlinedIcon />}
                                         onClick={this.onClickSelectFile}
@@ -140,7 +144,7 @@ export default class Add extends Component {
                                     </Button>
                                 )}
 
-                                {!this.state.fileError && (
+                                {!this.state.fileSubmitError && (
                                     <Button
                                         disabled
                                         style={{ color: 'black' }}

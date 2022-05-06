@@ -45,7 +45,7 @@ export default class Posts extends Component {
         {this.state.posts.map(post => (
           <div key={post.id}>
             <Post
-              //link={post.link}
+              postId={post.id}
               avatar={<Timeline name={post.title} />}
               title={post.title}
               picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}

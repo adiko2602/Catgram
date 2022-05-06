@@ -29,6 +29,14 @@ class postService {
         return axios.get(apiUrl + "/Post");
     }
 
+    delete(id) {
+        return axios.delete(apiUrl + "/Post/" + id).then(
+            response => {
+                return response.data;
+            }
+        )
+    }
+
     // logout() {
     //     localStorage.removeItem("user");
     // }
