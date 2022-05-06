@@ -49,7 +49,7 @@ export default class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              {this.state.loggedIn ? <Redirect to="/profile" /> : <Start />}
+              {this.state.loggedIn ? <Redirect to="/posts" /> : <Start />}
             </Route>
             <Route path="/login">
               {this.state.loggedIn ? <Redirect to="/profile" /> : <Login />}
@@ -65,6 +65,9 @@ export default class App extends Component {
             </Route>
             <Route path="/profile">
               {!this.state.loggedIn ? <Redirect to="/" /> : <Profile />}
+            </Route>
+            <Route path="/posts">
+              {!this.state.loggedIn ? <Redirect to="/" /> : <Posts />}
             </Route>
           </Switch>
         </Router>

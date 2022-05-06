@@ -1,180 +1,219 @@
 import { Button, Card, CardHeader, CardMedia, CardContent, TextField, Grid, Box } from '@mui/material';
-import { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, Component } from 'react'
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ButtonCustom from '../components/ButtonCustom'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import axios from 'axios';
 import Header from './Header'
+import postService from '../services/post-service';
 
-function Add() {
+export default class Add extends Component {
+    constructor(props) {
+        super(props);
+        this.handleCreatePost = this.handleCreatePost.bind(this);
+        this.onChangeSaveFile = this.onChangeSaveFile.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onClickSelectFile = this.onClickSelectFile.bind(this);
 
-    const apiPost = 'https://localhost:7045/api/Post'
+        this.state = {
+            file: {},
+            fileName: "",
+            title: "",
+            description: "",
+            titleError: false,
+            descriptionError: false,
+            fileError: true,
+            uploadError: true,
+            message: ""
+        }
 
+        this.fileInputRef = React.createRef();
 
-    const [file, setFile] = useState();
-    const [fileName, setFileName] = useState();
-
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [titleError, setTitleError] = useState(false);
-    const [descriptionError, setDescriptionError] = useState(false);
-    const [uploadedOk, setUploadedOk] = useState(false);
-    const [fileOk, setFileOk] = useState(false);
-
-    const fileInputRef = useRef();
-
-    const saveFile = (e) => {
-        console.log(e.target.files[0]);
-        setFile(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-        setFileOk(true);
     }
 
-    const uploadFile = async () => {
-        console.log(file);
-        const formData = new FormData();
-        formData.append("formFile", file);
-        formData.append("fileName", fileName);
-        formData.append("description", description);
-        formData.append("link", "");
-        formData.append("picture", "");
-        formData.append("title", title);
+    onClickSelectFile(e) {
+        e.preventDefault();
+        this.fileInputRef.current.click();
+    }
 
-        try {
-            const res = await axios.post(apiPost, formData);
-            console.log(res);
-        } catch (ex) {
-            console.log(ex);
+    onChangeTitle(e) {
+        this.setState({
+            title: e.target.value
+        });
+    }
+
+    onChangeDescription(e) {
+        this.setState({
+            description: e.target.value
+        });
+    }
+
+    onChangeSaveFile(e) {
+        this.setState({
+            file: e.target.files[0],
+            fileName: e.target.files[0].name,
+            fileError: false
+        });
+    }
+
+    handleCreatePost(e) {
+        e.preventDefault();
+        this.setState({
+            titleError: false,
+            descriptionError: false,
+            message: ""
+        });
+
+        if (this.state.title == "") {
+            this.setState({
+                titleError: true
+            });
+        }
+        if (this.state.description == "") {
+            this.setState({
+                descriptionError: true
+            });
+        }
+        if (this.state.fileName == "") {
+            this.setState({
+                fileError: true
+            });
+        }
+
+        if (this.state.title && this.state.description && this.state.fileName) {
+            postService.createPost(
+                this.state.title,
+                this.state.description,
+                this.state.file,
+                this.state.fileName
+            ).then(
+                () => {
+                    this.setState({
+                        uploadError: false
+                    });
+                },
+                error => {
+                    const resMessage = (
+                        error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    this.setState({
+                        uploadError: true,
+                        message: resMessage
+                    });
+                }
+            );
+
         }
     }
 
-    const createPost = async (e) => {
-        e.preventDefault()
-        setTitleError(false)
-        setDescriptionError(false)
-
-        if (title == '') {
-            setTitleError(true)
-        }
-        if (description == '') {
-            setDescriptionError(true)
-        }
-
-        if (title && description) {
-            const formData = new FormData();
-
-            formData.append("formFile", file);
-            formData.append("fileName", fileName);
-            formData.append("description", description);
-            formData.append("title", title);
-
-            try {
-                const res = await axios.post(apiPost, formData);
-                console.log(res);
-                setUploadedOk(true);
-            } catch (ex) {
-                setUploadedOk(false);
-                console.log(ex);
-            }
-        }
-    }
-
-    if (!uploadedOk) {
-        return (
-            <>
-            <Header />
-            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
-                <CardHeader
-                    title="Create new post"
-                />
-                <CardContent>
-                    <form noValidate autoComplete="off" onSubmit={createPost}>
-
-                        {fileOk ? (
-                            <Button
-                                disabled
-                                style={{ color: 'black' }}
-                                variant="text"
-                                startIcon={<AddPhotoAlternateOutlinedIcon />}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    fileInputRef.current.click();
-                                }}
-                            >
-                                File Selected
-                            </Button>
-                        ) : (
-                            <Button
-                                style={{ color: 'black' }}
-                                variant="text"
-                                startIcon={<AddPhotoAlternateOutlinedIcon />}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    fileInputRef.current.click();
-                                }}
-                            >
-                                Upload File
-                            </Button>
-                        )}
-
-                        <input
-                            hidden
-                            type="file"
-                            style={{ display: 'none' }}
-                            ref={fileInputRef}
-                            accept="image/*"
-                            onChange={saveFile}
+    render() {
+        if (this.state.uploadError) {
+            return (
+                <>
+                    <Header />
+                    <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                        <CardHeader
+                            title="Create new post"
                         />
-                        <TextField
-                            onChange={(event) => setTitle(event.target.value)}
-                            style={{ marginTop: '10px' }}
-                            label="Title"
-                            variant="outlined"
-                            fullWidth
-                            required
-                            color="secondary"
-                            error={titleError}
-                        />
+                        <CardContent>
+                            {this.state.message && (
+                                <p className="mb-4 text-xs text-red-primary">
+                                    {this.state.message}
+                                </p>
+                            )}
+                            <form noValidate autoComplete="off" onSubmit={this.handleCreatePost}>
 
-                        <TextField
-                            onChange={(event) => setDescription(event.target.value)}
-                            style={{ marginTop: '10px' }}
-                            label="Description"
-                            variant="outlined"
-                            fullWidth
-                            required
-                            multiline
-                            color="secondary"
-                            rows={4}
-                            error={descriptionError}
+
+                                {this.state.fileError && (
+                                    <Button
+                                        style={{ color: 'black' }}
+                                        variant="text"
+                                        startIcon={<AddPhotoAlternateOutlinedIcon />}
+                                        onClick={this.onClickSelectFile}
+                                    >
+                                        Upload File
+                                    </Button>
+                                )}
+
+                                {!this.state.fileError && (
+                                    <Button
+                                        disabled
+                                        style={{ color: 'black' }}
+                                        variant="text"
+                                        startIcon={<AddPhotoAlternateOutlinedIcon />}
+                                        onClick={this.onClickSelectFile}
+                                    >
+                                        File Selected
+                                    </Button>
+                                )}
+
+                                <input
+                                    hidden
+                                    type="file"
+                                    style={{ display: 'none' }}
+                                    ref={this.fileInputRef}
+                                    accept="image/*"
+                                    onChange={this.onChangeSaveFile}
+                                />
+
+                                <TextField
+                                    onChange={this.onChangeTitle}
+                                    style={{ marginTop: '10px' }}
+                                    label="Title"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    color="secondary"
+                                    error={this.state.titleError}
+                                />
+
+                                <TextField
+                                    onChange={this.onChangeDescription}
+                                    style={{ marginTop: '10px' }}
+                                    label="Description"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    multiline
+                                    color="secondary"
+                                    rows={4}
+                                    error={this.state.descriptionError}
+                                />
+
+                                <Button
+                                    style={{ marginTop: '10px', color: 'black' }}
+                                    type="submit"
+                                    variant="text"
+                                    endIcon={<SendOutlinedIcon />}>
+                                    Submit
+                                </Button>
+
+
+
+                            </form>
+                        </CardContent>
+                    </Card>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Header />
+                    <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                        <CardHeader
+                            title="New post was created"
                         />
-                        <Button
-                            style={{ marginTop: '10px', color: 'black' }}
-                            type="submit"
-                            variant="text"
-                            endIcon={<SendOutlinedIcon />}>
-                            Submit
-                        </Button>
-                    </form>
-                </CardContent>
-            </Card>
-            </>
-        );
-    } else {
-        return (
-            <>
-            <Header />
-            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
-                <CardHeader
-                    title="New post was created"
-                />
-                <CardContent>
-                    <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
-                </CardContent>
-            </Card>
-            </>
-        );
+                        <CardContent>
+                            <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
+                        </CardContent>
+                    </Card>
+                </>
+            );
+        }
     }
 }
-export default Add;
