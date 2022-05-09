@@ -50,6 +50,7 @@ export default class SignUp extends Component {
       this.state.username,
       this.state.password).then(
         response => {
+          console.log(response);
           this.setState({
             message: response.data.message,
             successful: true,
@@ -57,6 +58,7 @@ export default class SignUp extends Component {
           });
         },
         error => {
+          console.log(error);
           const resMessage = (
             error.response &&
             error.response.data &&

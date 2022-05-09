@@ -21,7 +21,7 @@ export default function NotFound() {
           />
           <CardContent>
             <Typography variant="h6" color="text.primary" align="center">
-              You are probably lost. Click this button for back to home page.
+              You are probably lost. Click "Home" for back to home page.
             </Typography>
             <Typography align="center" variant="h1">
               <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
