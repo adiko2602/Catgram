@@ -6,6 +6,7 @@ import axios from 'axios'
 import Header from './Header';
 import { useState, useEffect, Component } from "react";
 import postService from '../services/post-service';
+import { Grid } from '@mui/material'
 
 export default class Posts extends Component {
   constructor(props) {
@@ -38,22 +39,32 @@ export default class Posts extends Component {
   }
 
   render() {
-    console.log(this.state.posts);
     return (
-      <div>
+      <>
         <Header />
-        {this.state.posts.map(post => (
-          <div key={post.id}>
-            <Post
-              postId={post.id}
-              avatar={<Timeline name={post.title} />}
-              title={post.title}
-              picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
-              description={post.description}
-            />
-          </div>
-        ))}
-      </div>
+        <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '100vh' }}
+    >
+      <Grid item xs={3}>
+            {this.state.posts.map(post => (
+              <div key={post.id}>
+                <Post
+                  postId={post.id}
+                  avatar={<Timeline name={post.title} />}
+                  title={post.title}
+                  picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
+                  description={post.description}
+                />
+              </div>
+            ))}
+          </Grid>
+        </Grid>
+      </>
     );
   }
 }

@@ -4,7 +4,7 @@ import authService from "./auth-service";
 const apiUrl = "https://localhost:7045";
 
 class postService {
-    createPost(title, description, file, fileName) {
+    async createPost(title, description, file, fileName) {
         const user = authService.getCurrentUser();
         const userId = user.id;
         const formData = new FormData();
@@ -15,22 +15,30 @@ class postService {
         formData.append("Title", title);
         formData.append("Description", description);
 
-        return axios.post(apiUrl + "/Post", formData).then(
+        return await axios.post(apiUrl + "/Post", formData).then(
             response => {
                 return response.data;
             }
         );
     }
 
-    getPosts() {
+    async getCurrentPosts() {
         const user = authService.getCurrentUser();
         const userId = user.id;
 
-        return axios.get(apiUrl + "/Post");
+        return await axios.get(apiUrl + "/Post/User/" + userId);
+        
     }
 
-    delete(id) {
-        return axios.delete(apiUrl + "/Post/" + id).then(
+    async getPosts() {
+        const user = authService.getCurrentUser();
+        const userId = user.id;
+
+        return await axios.get(apiUrl + "/Post");
+    }
+
+    async delete(id) {
+        return await axios.delete(apiUrl + "/Post/" + id).then(
             response => {
                 return response.data;
             }
