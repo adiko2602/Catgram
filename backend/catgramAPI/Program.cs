@@ -59,10 +59,12 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false,
-        ValidateAudience = false/*
+        ValidateAudience = false
+        /*
         ValidateLifetime = true,
         ValidIssuer = builder.Configuration["AppSettings:Issuer"],
-        ValidAudience = builder.Configuration["AppSettings:Issuer"]*/
+        ValidAudience = builder.Configuration["AppSettings:Issuer"]
+        */
     };
 });
 
