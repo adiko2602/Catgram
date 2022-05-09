@@ -107,7 +107,7 @@ export default class Profile extends Component {
                     type="submit"
                     className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                 >
-                    logout
+                    Logout
                 </button>
                 <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                     <CardHeader
