@@ -962,6 +962,13 @@ video {
   line-height: 8vw;
 }
 
+.text-main-main {
+  padding-left: 0px;
+  padding-top: 0px;
+  font-size: 3.5vw;
+  line-height: 2vw;
+}
+
 .text-medium {
   padding-top: 30px;
   font-size: 3vw;
@@ -970,7 +977,7 @@ video {
 
 .text-sub-sub {
   padding-top: 10px;
-  font-size: 0.8rem;
+  font-size: 0.7vw;
   line-height: 2.5rem;
 }
 

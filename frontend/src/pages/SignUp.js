@@ -109,24 +109,24 @@ export default class SignUp extends Component {
               </h1>
 
               {!this.state.successful && <p className="mb-4 text-xs text-red-primary">{this.state.message}</p>}
-              {this.state.successful && (<ButtonCustom link="/login" name="Login" icon={ <HomeOutlinedIcon /> }/>)}
+              {this.state.successful && (<ButtonCustom link="/login" name="Login" icon={<HomeOutlinedIcon />} />)}
               {!this.state.successful && (
-              <form
-                onSubmit={this.handleRegister}
-              >
+                <form
+                  onSubmit={this.handleRegister}
+                >
 
-                <input
-                  aria-label="Enter your username"
-                  type="text"
-                  placeholder="Username"
-                  className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                  onChange={this.onChangeUsername}
-                  value={this.state.username}
-                  disabled={this.state.successful}
-                />
+                  <input
+                    aria-label="Enter your username"
+                    type="text"
+                    placeholder="Username"
+                    className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
+                    onChange={this.onChangeUsername}
+                    value={this.state.username}
+                    disabled={this.state.successful}
+                  />
 
 
-                {/* <input
+                  {/* <input
                   aria-label="Enter your full name"
                   type="text"
                   placeholder="Full name"
@@ -143,24 +143,24 @@ export default class SignUp extends Component {
                   value={emailAddress}
                 /> */}
 
-                
-                <input
-                  aria-label="Enter your password"
-                  type="password"
-                  placeholder="Password"
-                  className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                  onChange={this.onChangePassword}
-                  value={this.state.password}
-                  disabled={this.state.successful}
-                />
-                <button
-                  disabled={this.state.loading || this.state.successful}
-                  type="submit"
-                  className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
-                >
-                  Sign Up {this.state.loading && ("...") }
-                </button>
-              </form>)}
+
+                  <input
+                    aria-label="Enter your password"
+                    type="password"
+                    placeholder="Password"
+                    className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
+                    onChange={this.onChangePassword}
+                    value={this.state.password}
+                    disabled={this.state.successful}
+                  />
+                  <button
+                    disabled={this.state.loading || this.state.successful}
+                    type="submit"
+                    className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
+                  >
+                    Sign Up {this.state.loading && ("...")}
+                  </button>
+                </form>)}
             </div>
             <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
               <p className="text-sm">
