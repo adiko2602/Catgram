@@ -76,7 +76,7 @@ namespace catgramAPI.Controllers
                 return Ok();
             } catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Username is taken");
             }
         }
 

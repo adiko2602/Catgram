@@ -8,6 +8,7 @@ namespace catgramAPI.Services
         Post Add(Post post);
         List<Post> Get();
         Post GetId(int id);
+        List<Post> GetByUserId(int id);
         void Update(Post post);
         void Delete(int id);
     }
@@ -33,6 +34,13 @@ namespace catgramAPI.Services
         public Post GetId(int id)
         {
             return _context.Posts.Find(id);
+        }
+        public List<Post> GetByUserId(int id)
+        {
+            var posts = _context.Posts
+                    .Where(c => c.UserId == id).ToList();
+
+            return posts;
         }
         public void Update(Post postUpdate)
         {

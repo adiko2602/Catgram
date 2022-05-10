@@ -117,108 +117,127 @@ export default class Add extends Component {
             return (
                 <>
                     <Header />
-                    <div className="flex justify-center items-center flex-col">
-                    <Card style={{ width: '614px', marginTop: '20px'}} elevation={5}>
-                        <CardHeader
-                            title="Create new post"
-                            className="flex justify-center items-center flex-col p-4 text-black"
-                        />
-                        <CardContent>
-                            {this.state.message && (
-                                <p className=" mb-4 items-center text-xs text-red-primary">
-                                    {this.state.message}
-                                </p>
-                            )}
-                            <form noValidate autoComplete="off" onSubmit={this.handleCreatePost}>
-
-
-                                {this.state.fileSubmitError && (
-                                    <Button
-                                        style={{ 
-                                            color: this.state.fileError ? '#d32f2f' : 'black',
-                                            borderColor: this.state.fileError ? '#d32f2f' : 'black' 
-                                        }}
-                                        variant="text"
-                                        startIcon={<AddPhotoAlternateOutlinedIcon />}
-                                        onClick={this.onClickSelectFile}
-                                    >
-                                        Upload picture
-                                    </Button>
-                                )}
-
-                                {!this.state.fileSubmitError && (
-                                    <Button
-                                        disabled
-                                        style={{ color: 'black' }}
-                                        variant="text"
-                                        startIcon={<AddPhotoAlternateOutlinedIcon />}
-                                        onClick={this.onClickSelectFile}
-                                    >
-                                        File Selected
-                                    </Button>
-                                )}
-
-                                <input
-                                    hidden
-                                    type="file"
-                                    style={{ display: 'none' }}
-                                    ref={this.fileInputRef}
-                                    accept="image/*"
-                                    onChange={this.onChangeSaveFile}
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{ minHeight: '100vh' }}
+                    >
+                        <Grid item xs={3}>
+                            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                                <CardHeader
+                                    title="Create new post"
                                 />
-
-                                <TextField
-                                    onChange={this.onChangeTitle}
-                                    style={{ marginTop: '10px' }}
-                                    label="Title"
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    color="secondary"
-                                    error={this.state.titleError}
-                                />
-
-                                <TextField
-                                    onChange={this.onChangeDescription}
-                                    style={{ marginTop: '10px' }}
-                                    label="Description"
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    multiline
-                                    color="secondary"
-                                    rows={4}
-                                    error={this.state.descriptionError}
-                                />
-
-                                <Button
-                                    style={{ marginTop: '10px', color: 'black' }}
-                                    type="submit"
-                                    variant="text"
-                                    endIcon={<SendOutlinedIcon />}>
-                                    Submit
-                                </Button>
+                                <CardContent>
+                                    {this.state.message && (
+                                        <p className="mb-4 text-xs text-red-primary">
+                                            {this.state.message}
+                                        </p>
+                                    )}
+                                    <form noValidate autoComplete="off" onSubmit={this.handleCreatePost}>
 
 
+                                        {this.state.fileSubmitError && (
+                                            <Button
+                                                style={{
+                                                    color: this.state.fileError ? '#d32f2f' : 'black',
+                                                    borderColor: this.state.fileError ? '#d32f2f' : 'black'
+                                                }}
+                                                variant="text"
+                                                startIcon={<AddPhotoAlternateOutlinedIcon />}
+                                                onClick={this.onClickSelectFile}
+                                            >
+                                                Upload File
+                                            </Button>
+                                        )}
 
-                            </form>
-                        </CardContent>
-                    </Card>
-                    </div>
+                                        {!this.state.fileSubmitError && (
+                                            <Button
+                                                disabled
+                                                style={{ color: 'black' }}
+                                                variant="text"
+                                                startIcon={<AddPhotoAlternateOutlinedIcon />}
+                                                onClick={this.onClickSelectFile}
+                                            >
+                                                File Selected
+                                            </Button>
+                                        )}
+
+                                        <input
+                                            hidden
+                                            type="file"
+                                            style={{ display: 'none' }}
+                                            ref={this.fileInputRef}
+                                            accept="image/*"
+                                            onChange={this.onChangeSaveFile}
+                                        />
+
+                                        <TextField
+                                            onChange={this.onChangeTitle}
+                                            style={{ marginTop: '10px' }}
+                                            label="Title"
+                                            variant="outlined"
+                                            fullWidth
+                                            required
+                                            color="secondary"
+                                            error={this.state.titleError}
+                                        />
+
+                                        <TextField
+                                            onChange={this.onChangeDescription}
+                                            style={{ marginTop: '10px' }}
+                                            label="Description"
+                                            variant="outlined"
+                                            fullWidth
+                                            required
+                                            multiline
+                                            color="secondary"
+                                            rows={4}
+                                            error={this.state.descriptionError}
+                                        />
+
+                                        <Button
+                                            style={{ marginTop: '10px', color: 'black' }}
+                                            type="submit"
+                                            variant="text"
+                                            endIcon={<SendOutlinedIcon />}>
+                                            Submit
+                                        </Button>
+
+
+
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                 </>
             );
         } else {
             return (
                 <>
                     <Header />
-                    <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
-                        <CardHeader
-                            title="New post was created"
-                        />
-                        <CardContent>
-                            <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
-                        </CardContent>
-                    </Card>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{ minHeight: '100vh' }}
+                    >
+                        <Grid item xs={3}>
+                            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                                <CardHeader
+                                    title="New post was created"
+                                />
+                                <CardContent>
+                                    <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                 </>
             );
         }

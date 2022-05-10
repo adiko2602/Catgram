@@ -31,8 +31,17 @@ namespace catgramAPI.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("User/{id}")]
+        public IActionResult GetByUserId(int id)
+        {
+            var posts = _postService.GetByUserId(id);
+            if (posts == null)
+                return BadRequest();
+            return Ok(posts);
+        }
 
-        [HttpGet("{id}")]
+
+            [HttpGet("{id}")]
         public IActionResult GetId(int id)
         {
             var post = _postService.GetId(id);

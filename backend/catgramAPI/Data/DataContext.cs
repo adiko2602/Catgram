@@ -10,5 +10,7 @@ namespace catgramAPI.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Profile> Profiles { get; set;  }
+        public DbSet<Follow> Follows { get; set; }
     }
 }

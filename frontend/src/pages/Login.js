@@ -9,6 +9,7 @@ import axios from 'axios';
 import authService from '../services/auth-service';
 import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import userService from '../services/user-service';
 
 
 
@@ -48,25 +49,30 @@ export default class Login extends Component {
       loading: true
     });
 
+    var userId;
+
     authService.login(
-      this.state.username, 
+      this.state.username,
       this.state.password).then(
-      () => {
-        window.location.reload();
-      },
-      error => {
-        const resMessage = (
-          error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-          error.message ||
-          error.toString();
-        this.setState({
-          loading: false,
-          message: resMessage
-        });
-      }
-    );
+        () => {
+          window.location.reload();
+        },
+        error => {
+          const resMessage = (
+            error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            error.message ||
+            error.toString();
+          this.setState({
+            loading: false,
+            message: resMessage
+          });
+        }
+      )
+
+
+
   }
 
   render() {
@@ -136,7 +142,7 @@ export default class Login extends Component {
                   className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                 >
                   Login
-                  {this.state.loading && ( "..." )}
+                  {this.state.loading && ("...")}
                 </button>
 
               </form>
