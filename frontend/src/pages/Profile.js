@@ -8,6 +8,13 @@ import AvatarCustom from '../components/AvatarCustom';
 import { useState, useEffect } from "react";
 import { ImageList, ImageListItem, ImageListItemBar, Grid, CardHeader, Card, CardContent, Typography } from '@mui/material';
 import authService from '../services/auth-service';
+import ButtonCustom from '../components/ButtonCustom'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { AppBar, Toolbar, IconButton } from '@mui/material'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+
 
 export default class Profile extends Component {
     constructor(props) {
@@ -101,19 +108,38 @@ export default class Profile extends Component {
     render() {
         return (
             <>
-                <Header />
-                <button
-                    onClick={this.handleLogout}
-                    type="submit"
-                    className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
-                >
-                    Logout
-                </button>
+                <AppBar position="sticky" elevation={5}>
+                    <Toolbar>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="flex-start"
+                        >
+                            <a href="/">
+                                <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{ height: '38px', justifyContent: 'flex-start', marginLeft: '0px', direction: 'row', marginTop: '5px' }} />
+                            </a>
+                        </Grid>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="flex-end"
+                        >
+                            <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
+                            <ButtonCustom link="/add" name="Add" icon={<AddBoxOutlinedIcon />} />
+                            <ButtonCustom link="/profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
+                            <IconButton aria-label="Logout" onClick={this.handleLogout} type="submit" color="secondary">
+                                <LogoutOutlinedIcon />
+                            </IconButton>
+                        </Grid>
+                    </Toolbar>
+                </AppBar>
+                
+                <div className="flex justify-center items-center flex-col">
                 <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                     <CardHeader
                         avatar={<AvatarCustom name={this.state.currentUser.username} />}
                         title="Pobierz nazwe profilu"
-                        subheader="Krótki opis profilu który jest w chuj długi zeby zobaczyc jak to bedzie wygladac gdy bedzie az tak cholernie dlugi"
+                        subheader="Krótki opis profilu który jest w długi zeby zobaczyc jak to bedzie wygladac gdy bedzie az tak dlugi"
                     />
                     <CardContent>
                         <ImageList cols={3} gap={8}>
@@ -132,6 +158,7 @@ export default class Profile extends Component {
                         </ImageList>
                     </CardContent>
                 </Card>
+                </div>
             </>
         );
     }

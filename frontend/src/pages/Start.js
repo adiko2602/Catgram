@@ -17,7 +17,7 @@ export default function Start() {
                     direction="row"
                     justifyContent="flex-start"
                 >
-                    <a href="/start">
+                    <a href="/">
                         <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{ height: '38px', justifyContent: 'flex-start', marginLeft: '0px', direction: 'row', marginTop: '5px' }} />
                     </a>
                 </Grid>
@@ -33,14 +33,24 @@ export default function Start() {
             </Toolbar>
         </AppBar>
 
-        </><div className="flex justify-center items-center flex-col p-4 text-white">
-                <p className="text-main">
-                    Welcome to Catagram! 
-                </p>
-                <p className="text-sub">
-                    Fast-Growing community of creative cat loving owners.
-                </p>
-            </div></>
+        </>
+            <div className="container flex mx-auto items-center h-screen">
+                <div className="flex w-full">
+                </div>
+                <div className="flex flex-col w-full">
+                    <div className="flex justify-center items-center flex-col w-full p-4 rounded text-white">
+                        <p className="text-main">
+                            Welcome to Catagram!
+                        </p>
+                        <p className="text-sub">
+                            Fast-Growing community of creative cat loving owners.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </>
     );
 }
 //<ButtonCustom link="/login" name="Catagram"/>

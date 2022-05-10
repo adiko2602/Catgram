@@ -956,27 +956,27 @@ video {
 
 /* custom */
 .text-main {
-  padding-left: 900px;
-  padding-top: 250px;
-  font-size: 5rem;
-  line-height: 10rem;
+  padding-left: 0px;
+  padding-top: 0px;
+  font-size: 3.5vw;
+  line-height: 8vw;
 }
 
 .text-medium {
   padding-top: 30px;
-  font-size: 5rem;
-  line-height: 5.5rem;
+  font-size: 3vw;
+  line-height: 2vw;
 }
 
 .text-sub-sub {
   padding-top: 10px;
   font-size: 0.8rem;
-  line-height: rem;
+  line-height: 2.5rem;
 }
 
 .text-sub {
-  padding-left: 900px;
-  font-size: 1.5rem;
+  padding-left: 0px;
+  font-size: 1.25vw;
   line-height: 0rem;
 }
 

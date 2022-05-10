@@ -117,13 +117,15 @@ export default class Add extends Component {
             return (
                 <>
                     <Header />
-                    <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                    <div className="flex justify-center items-center flex-col">
+                    <Card style={{ width: '614px', marginTop: '20px'}} elevation={5}>
                         <CardHeader
                             title="Create new post"
+                            className="flex justify-center items-center flex-col p-4 text-black"
                         />
                         <CardContent>
                             {this.state.message && (
-                                <p className="mb-4 text-xs text-red-primary">
+                                <p className=" mb-4 items-center text-xs text-red-primary">
                                     {this.state.message}
                                 </p>
                             )}
@@ -140,7 +142,7 @@ export default class Add extends Component {
                                         startIcon={<AddPhotoAlternateOutlinedIcon />}
                                         onClick={this.onClickSelectFile}
                                     >
-                                        Upload File
+                                        Upload picture
                                     </Button>
                                 )}
 
@@ -202,6 +204,7 @@ export default class Add extends Component {
                             </form>
                         </CardContent>
                     </Card>
+                    </div>
                 </>
             );
         } else {

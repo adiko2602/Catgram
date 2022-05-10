@@ -43,7 +43,7 @@ export default class Posts extends Component {
       <div>
         <Header />
         {this.state.posts.map(post => (
-          <div key={post.id}>
+          <div className="flex justify-center items-center flex-col p-4" key={post.id}>
             <Post
               postId={post.id}
               avatar={<Timeline name={post.title} />}

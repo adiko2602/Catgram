@@ -83,7 +83,7 @@ export default class SignUp extends Component {
             direction="row"
             justifyContent="flex-start"
           >
-            <a href="/start">
+            <a href="/">
               <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{ height: '38px', justifyContent: 'flex-start', marginLeft: '0px', direction: 'row', marginTop: '5px' }} />
             </a>
           </Grid>

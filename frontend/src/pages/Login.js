@@ -78,7 +78,7 @@ export default class Login extends Component {
             direction="row"
             justifyContent="flex-start"
           >
-            <a href="/start">
+            <a href="/">
               <input type="image" src="https://i.imgur.com/ZTcHjwn.png" style={{ height: '38px', justifyContent: 'flex-start', marginLeft: '0px', direction: 'row', marginTop: '5px' }} />
             </a>
           </Grid>
@@ -111,9 +111,9 @@ export default class Login extends Component {
               <form onSubmit={this.handleLogin}>
 
                 <input
-                  aria-label="Enter your email address"
+                  aria-label="Enter your login"
                   type="text"
-                  placeholder="Email address"
+                  placeholder="Login"
                   className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                   onChange={this.onChangeUsername}
                   value={this.state.username}
