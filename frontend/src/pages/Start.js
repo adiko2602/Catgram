@@ -53,14 +53,3 @@ export default function Start() {
         </>
     );
 }
-//<ButtonCustom link="/login" name="Catagram"/>
-
-
-/*</><div className="flex justify-center items-center flex-col p-4 text-white">
-<p className="text-main">
-    Welcome to Catagram! 
-</p>
-<p className="text-sub">
-    Fast-Growing community of creative cat loving owners.
-</p>
-</div></>*/
