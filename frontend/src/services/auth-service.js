@@ -5,13 +5,14 @@ const apiUrl = "https://localhost:7045";
 
 class authService {
     login(username, password) {
+        const email = "";
         return axios.post(apiUrl + "/User/auth/login", {
             username,
-            password
+            password,
+            email
         }).then(response => {
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify(response.data));
-                userService.login(response.data.id);
             }
             return response.data;
         }
@@ -22,10 +23,11 @@ class authService {
         localStorage.removeItem("user");
     }
 
-    async register(username, password) {
+    async register(username, password, email) {
         return await axios.post(apiUrl + "/User/auth/register", {
             username,
-            password
+            password,
+            email
         });
     }
 

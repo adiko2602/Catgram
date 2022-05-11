@@ -7,10 +7,12 @@ class postService {
     async createPost(title, description, file, fileName) {
         const user = authService.getCurrentUser();
         const userId = user.id;
+        const userName = user.username;
         const formData = new FormData();
         
         formData.append("FormFile", file);
         formData.append("UserId", userId);
+        formData.append("UserName", userName);
         formData.append("FileName", fileName);
         formData.append("Title", title);
         formData.append("Description", description);
@@ -31,9 +33,6 @@ class postService {
     }
 
     async getPosts() {
-        const user = authService.getCurrentUser();
-        const userId = user.id;
-
         return await axios.get(apiUrl + "/Post");
     }
 

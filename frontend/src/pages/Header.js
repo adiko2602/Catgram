@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Grid, Typography, IconButton } from '@mui/material'
+import { AppBar, Toolbar, Grid, Typography, Button } from '@mui/material'
 import ButtonCustom from '../components/ButtonCustom'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
@@ -46,11 +46,13 @@ export default class Header extends Component {
                         <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
                         <ButtonCustom link="/add" name="Add" icon={<AddBoxOutlinedIcon />} />
                         <ButtonCustom link="/profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
-                        <button onClick={this.handleLogout} >Logout</button>
-                        <IconButton aria-label="Logout" onClick={this.handleLogout}>
-                            <LogoutOutlinedIcon />
-                        </IconButton>
-                        {/*<ButtonCustom name="Logout" icon={<LogoutOutlinedIcon />} onClick={this.handleLogout} />}*/}
+                        <Button 
+                            onClick={this.handleLogout}
+                            style={{ color: 'black', marginLeft: '0px' }} 
+                            variant="text" 
+                            startIcon={<LogoutOutlinedIcon />} >
+                                Logout
+                        </Button>
                     </Grid>
                 </Toolbar>
             </AppBar>

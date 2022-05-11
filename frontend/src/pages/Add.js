@@ -4,6 +4,7 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ButtonCustom from '../components/ButtonCustom'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import axios from 'axios';
 import Header from './Header'
 import postService from '../services/post-service';
@@ -233,7 +234,7 @@ export default class Add extends Component {
                                     title="New post was created"
                                 />
                                 <CardContent>
-                                    <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
+                                    <ButtonCustom link="/Profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
                                 </CardContent>
                             </Card>
                         </Grid>

@@ -49,13 +49,27 @@ export default class Login extends Component {
       loading: true
     });
 
-    var userId;
-
     authService.login(
       this.state.username,
       this.state.password).then(
         () => {
-          window.location.reload();
+          userService.login().then(
+            () => {
+              window.location.reload();
+            },
+            error => {
+              const resMessage = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+              this.setState({
+                loading: false,
+                message: resMessage
+              });
+            });
+            window.location.reload();
         },
         error => {
           const resMessage = (

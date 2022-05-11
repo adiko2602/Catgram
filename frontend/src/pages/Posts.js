@@ -20,6 +20,8 @@ export default class Posts extends Component {
   componentDidMount() {
     postService.getPosts().then(
       response => {
+        
+    console.warn(response.data)
         this.setState({
           posts: response.data
         });
@@ -37,6 +39,7 @@ export default class Posts extends Component {
       }
     );
   }
+ 
 
   render() {
     return (
@@ -55,7 +58,7 @@ export default class Posts extends Component {
               <div key={post.id}>
                 <Post
                   postId={post.id}
-                  avatar={<Timeline name={post.title} />}
+                  avatar={<Timeline name={post.userName} />}
                   title={post.title}
                   picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
                   description={post.description}

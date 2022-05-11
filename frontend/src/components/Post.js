@@ -8,58 +8,15 @@ import postService from '../services/post-service';
 export default class Post extends Component {
     constructor(props) {
         super(props);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.state = {
-            message: "",
-            postDelete: false
-        }
-    }
-
-    handleDelete(e) {
-        e.preventDefault();
-        postService.delete(this.props.postId).then(
-            () => {
-                this.setState({
-                    postDelete: true
-                });
-            },
-            error => {
-                const resMessage = (
-                    error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.setState({
-                    postDelete: false,
-                    message: resMessage
-                });
-            }
-        );
-        window.location.reload();
     }
 
     render() {
         console.log(this.props.postId)
         return (
-            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+            <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                 <CardHeader
-                    avatar={
-                        <Link href={this.props.link} underline="none" style={{ color: 'black' }}>
-                            {this.props.avatar}
-                        </Link>
-                        }
+                    avatar={this.props.avatar}
                     title={this.props.title}
-                    action={
-                        <Button
-                        style={{ color: 'black' }}
-                        variant="text"
-                        startIcon={<DeleteOutlineIcon />}
-                        onClick={this.handleDelete}
-                    >
-                        Delete
-                    </Button>
-                    }
                 />
                 <CardMedia
                     component="img"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Post from '../components/Post'
+import PostProfile from '../components/PostProfile'
 import Timeline from '../components/Timeline';
 import Friends from './Friends';
 import axios from 'axios'
@@ -76,23 +76,17 @@ export default class Profile extends Component {
                                 title={this.state.currentProfile.name}
                                 subheader={this.state.currentProfile.description}
                             />
-                            <CardContent>
-                                <ImageList cols={3} gap={8}>
-                                    {this.state.currentPosts.map((post) => (
-                                        <ImageListItem key={post.id}>
-                                            <a href={post.linkPicture}>
-                                                <img
-                                                    src={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
-
-                                                    alt={post.title}
-                                                    loading="lazy"
-                                                />
-                                            </a>
-                                        </ImageListItem>
-                                    ))}
-                                </ImageList>
-                            </CardContent>
                         </Card>
+                                {this.state.currentPosts.map(post => (
+                                    <div key={post.id}>
+                                        <PostProfile
+                                            postId={post.id}
+                                            title={post.title}
+                                            picture={post.linkPicture.replace('E:/Studia/SEMESTR 4/catgram/', 'http://127.0.0.1:8080/')}
+                                            description={post.description}
+                                        />
+                                    </div>
+                                ))}
                     </Grid>
                 </Grid>
             </>
