@@ -48,8 +48,6 @@ export default function Start() {
                     </div>
                 </div>
             </div>
-
-
         </>
     );
 }
