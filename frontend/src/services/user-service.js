@@ -5,10 +5,10 @@ import authService from "./auth-service";
 const apiUrl = "https://localhost:7045";
 
 class userService {
-    login() {
+    async login() {
         const user = authService.getCurrentUser();
         const userId = user.id;
-        return axios.get(apiUrl + "/Profile/" + userId).then(response => {
+        return await axios.get(apiUrl + "/Profile/" + userId, authHeader).then(response => {
             if(response.data.name)
                 localStorage.setItem("profile", JSON.stringify(response.data));
                 
@@ -26,6 +26,20 @@ class userService {
             lastname,
             description
         })
+    }
+
+    async update(userId, name, lastname, description) {
+        return await axios.put(apiUrl + "/Profile/", {
+            userId,
+            name,
+            lastname,
+            description
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + authService.getToken()
+            }
+        });
+
     }
 
     logout() {

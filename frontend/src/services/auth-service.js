@@ -4,9 +4,9 @@ import userService from "./user-service";
 const apiUrl = "https://localhost:7045";
 
 class authService {
-    login(username, password) {
+    async login(username, password) {
         const email = "";
-        return axios.post(apiUrl + "/User/auth/login", {
+        return await axios.post(apiUrl + "/User/auth/login", {
             username,
             password,
             email
@@ -32,6 +32,7 @@ class authService {
     }
 
     getCurrentUser() {
+        while(localStorage.getItem("user") == null);
         return JSON.parse(localStorage.getItem("user"));
     }
 
@@ -40,6 +41,11 @@ class authService {
             return false;
         }
         return true;
+    }
+
+    getToken() {
+        const user = this.getCurrentUser();
+        return user.token;
     }
 }
 

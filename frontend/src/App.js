@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ContactUs from './pages/ContactUs'
 import Profile from './pages/Profile'
+import ProfileEdit from './pages/ProfileEdit'
 import NotFound from './pages/not-found'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import React, { Component } from 'react'
@@ -40,7 +41,6 @@ export default class App extends Component {
     this.state = {
       loggedIn: authService.loggedIn()
     };
-    console.log(this.state.loggedIn);
   }
 
   render() {
@@ -66,6 +66,9 @@ export default class App extends Component {
             </Route>
             <Route path="/profile">
               {!this.state.loggedIn ? <Redirect to="/" /> : <Profile />}
+            </Route>
+            <Route path="/profileedit">
+              {!this.state.loggedIn ? <Redirect to="/" /> : <ProfileEdit />}
             </Route>
             <Route path="/posts">
               {!this.state.loggedIn ? <Redirect to="/" /> : <Posts />}

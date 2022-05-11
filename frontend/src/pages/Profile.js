@@ -3,6 +3,7 @@ import PostProfile from '../components/PostProfile'
 import Timeline from '../components/Timeline';
 import Friends from './Friends';
 import axios from 'axios'
+import EditIcon from '@mui/icons-material/Edit';
 import Header from './Header';
 import AvatarCustom from '../components/AvatarCustom';
 import { useState, useEffect } from "react";
@@ -10,7 +11,7 @@ import { ImageList, ImageListItem, ImageListItemBar, Grid, CardHeader, Card, Car
 import authService from '../services/auth-service';
 import ButtonCustom from '../components/ButtonCustom'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { AppBar, Toolbar, IconButton } from '@mui/material'
+import { AppBar, Toolbar, IconButton, Button } from '@mui/material'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
@@ -75,6 +76,14 @@ export default class Profile extends Component {
                                 avatar={<AvatarCustom name={this.state.currentUser.username} />}
                                 title={this.state.currentProfile.name}
                                 subheader={this.state.currentProfile.description}
+                                action={
+                                    <Button 
+                                    href="/profileedit"
+                                    style={{ color: 'black', marginLeft: '0px' }} 
+                                    variant="text" 
+                                    startIcon={<EditIcon />} >
+                                    </Button>
+                                }
                             />
                         </Card>
                                 {this.state.currentPosts.map(post => (

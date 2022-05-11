@@ -40,7 +40,6 @@ export default class PostProfile extends Component {
     }
 
     render() {
-        console.log(this.props.postId)
         return (
             <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                 <CardHeader

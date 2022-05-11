@@ -1,5 +1,6 @@
 import axios from "axios";
 import authService from "./auth-service";
+import authHeader from "./auth-header";
 
 const apiUrl = "https://localhost:7045";
 
@@ -17,7 +18,12 @@ class postService {
         formData.append("Title", title);
         formData.append("Description", description);
 
-        return await axios.post(apiUrl + "/Post", formData).then(
+        console.warn(authHeader());
+        return await axios.post(apiUrl + "/Post", formData, {
+            headers: {
+                Authorization: 'Bearer ' + authService.getToken()
+            }
+        }).then(
             response => {
                 return response.data;
             }
@@ -28,43 +34,33 @@ class postService {
         const user = authService.getCurrentUser();
         const userId = user.id;
 
-        return await axios.get(apiUrl + "/Post/User/" + userId);
+        return await axios.get(apiUrl + "/Post/User/" + userId, {
+            headers: {
+                Authorization: 'Bearer ' + authService.getToken()
+            }
+        });
         
     }
 
     async getPosts() {
-        return await axios.get(apiUrl + "/Post");
+        return await axios.get(apiUrl + "/Post", {
+            headers: {
+                Authorization: 'Bearer ' + authService.getToken()
+            }
+        });
     }
 
     async delete(id) {
-        return await axios.delete(apiUrl + "/Post/" + id).then(
+        return await axios.delete(apiUrl + "/Post/" + id, {
+            headers: {
+                Authorization: 'Bearer ' + authService.getToken()
+            }
+        }).then(
             response => {
                 return response.data;
             }
         )
     }
-
-    // logout() {
-    //     localStorage.removeItem("user");
-    // }
-
-    // register(username, password) {
-    //     return axios.post(apiUrl + "/User/auth/register", {
-    //         username,
-    //         password
-    //     });
-    // }
-    
-    // getCurrentUser() {
-    //     return JSON.parse(localStorage.getItem("user"));
-    // }
-
-    // loggedIn() {
-    //     if(localStorage.getItem("user") === null) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
 }
 
 export default new postService();
