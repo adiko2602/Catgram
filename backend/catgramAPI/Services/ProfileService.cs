@@ -8,6 +8,7 @@ namespace catgramAPI.Services
     {
         List<Profile> GetId(int id);
         Profile Create(Profile profile);
+        void Update(Profile profile);
     }
     public class ProfileService : IProfileService
     {
@@ -37,6 +38,22 @@ namespace catgramAPI.Services
             _context.SaveChanges();
 
             return profile;
+        }
+        public void Update(Profile profileUpdate)
+        {
+            var profile = _context.Profiles.FirstOrDefault(c => c.UserId == profileUpdate.UserId);
+            if (profile == null)
+            {
+                throw new Exception("Profile not found.");
+            }
+
+            profile.Name = profileUpdate.Name;
+            profile.Lastname = profileUpdate.Lastname;
+            profile.Description = profileUpdate.Description;
+
+
+            _context.Profiles.Update(profile);
+            _context.SaveChanges();
         }
     }
 }

@@ -7,7 +7,7 @@ using catgramAPI.Models;
 namespace catgramAPI.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class ProfileController : Controller
     {
@@ -22,6 +22,7 @@ namespace catgramAPI.Controllers
             _profileService = profileService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetId(int id)
         {
@@ -34,6 +35,7 @@ namespace catgramAPI.Controllers
             return Ok(prof);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create([FromBody] ProfileDto profileDto) 
         {
@@ -53,6 +55,32 @@ namespace catgramAPI.Controllers
             }
             catch (Exception ex)
             {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] ProfileDto profileDto)
+        {
+            var profile = new Profile
+            {
+                UserId = profileDto.UserId,
+                Name = profileDto.Name,
+                Lastname = profileDto.Lastname,
+                Description = profileDto.Description,
+                Created = DateTime.Today
+            };
+
+
+            try
+            {
+                _profileService.Update(profile);
+                Console.WriteLine("OK");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
             }
         }

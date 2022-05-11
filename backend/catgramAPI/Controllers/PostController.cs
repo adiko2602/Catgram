@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace catgramAPI.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class PostController : ControllerBase
     {
@@ -40,8 +40,7 @@ namespace catgramAPI.Controllers
             return Ok(posts);
         }
 
-
-            [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetId(int id)
         {
             var post = _postService.GetId(id);

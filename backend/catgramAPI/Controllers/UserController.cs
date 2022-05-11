@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace catgramAPI.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class UserController : Controller
     {

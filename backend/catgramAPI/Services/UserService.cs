@@ -47,6 +47,10 @@ namespace catgramAPI.Services
             if (_context.Users.Any(x => x.Username == user.Username))
                 throw new Exception("Username is taken.");
 
+
+            if (_context.Users.Any(x => x.Email == user.Email))
+                throw new Exception("Email is taken.");
+
             byte[] passwordHash;
             byte[] passwordSalt;
 
