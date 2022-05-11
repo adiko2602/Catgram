@@ -65,6 +65,7 @@ namespace catgramAPI.Controllers
             Post post = new Post()
             {
                 UserId = postDto.UserId,
+                UserName = postDto.UserName,
                 Title = postDto.Title,
                 Description = postDto.Description,
                 LinkPicture = path
@@ -85,6 +86,7 @@ namespace catgramAPI.Controllers
             {
                 Id = id,
                 UserId = post.UserId,
+                UserName = post.UserName,
                 LinkPicture = post.LinkPicture,
                 Title = updatePostDto.Title,
                 Description = updatePostDto.Description

@@ -54,6 +54,8 @@ namespace catgramAPI.Services
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
+            Console.Write(user.Username, user.Email);
+
             _context.Users.Add(user);
             _context.SaveChanges();
 

@@ -67,7 +67,8 @@ namespace catgramAPI.Controllers
         {
             var user = new User
             {
-                Username = userDto.Username
+                Username = userDto.Username,
+                Email = userDto.Email
             };
 
             try
@@ -98,7 +99,8 @@ namespace catgramAPI.Controllers
             var user = new User
             {
                 Id = userDto.Id,
-                Username = userDto.Username
+                Username = userDto.Username,
+                Email = userDto.Email
             };
 
             try

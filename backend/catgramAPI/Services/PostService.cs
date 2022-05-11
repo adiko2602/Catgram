@@ -29,7 +29,8 @@ namespace catgramAPI.Services
         }
         public List<Post> Get()
         {
-            return _context.Posts.ToList();
+            var posts = _context.Posts.OrderByDescending(p => p.Id).ToList();
+            return posts;
         }
         public Post GetId(int id)
         {
@@ -38,6 +39,7 @@ namespace catgramAPI.Services
         public List<Post> GetByUserId(int id)
         {
             var posts = _context.Posts
+                    .OrderByDescending(q => q.Id)
                     .Where(c => c.UserId == id).ToList();
 
             return posts;
