@@ -11,10 +11,19 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import userService from '../services/user-service';
 
-
-
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
+
+const addDataIntoCache = (cacheName, url, response) => {
+  const data = new Response(JSON.stringify(response));
+
+  if ('caches' in window) {
+    caches.open(cacheName).then((cache) => {
+      cache.put(url, data);
+    });
+  }
+};
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -131,9 +140,9 @@ export default class Login extends Component {
               <form onSubmit={this.handleLogin}>
 
                 <input
-                  aria-label="Enter your login"
+                  aria-label="Enter your Username"
                   type="text"
-                  placeholder="Login"
+                  placeholder="Username"
                   className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                   onChange={this.onChangeUsername}
                   value={this.state.username}
@@ -154,6 +163,7 @@ export default class Login extends Component {
                   type="submit"
                   disabled={this.state.loading}
                   className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
+                  onClick={()=>addDataIntoCache('Login Attempt','https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg','Background cache')}
                 >
                   Login
                   {this.state.loading && ("...")}

@@ -11,6 +11,7 @@ document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/ca
 document.body.style.backgroundSize = "cover";
 
 export default class ContactUs extends Component {
+
     constructor(props) {
         super(props);
 
