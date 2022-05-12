@@ -1,12 +1,11 @@
 import * as React from 'react'
 import Post from '../components/Post'
 import Timeline from '../components/Timeline';
-import Friends from './Friends';
-import axios from 'axios'
 import Header from './Header';
-import { useState, useEffect, Component } from "react";
+import { Component } from "react";
 import postService from '../services/post-service';
 import { Grid } from '@mui/material'
+import logger from '../logger/logger'
 
 export default class Posts extends Component {
   constructor(props) {
@@ -20,13 +19,15 @@ export default class Posts extends Component {
   componentDidMount() {
     postService.getPosts().then(
       response => {
-        
-    console.warn(response.data)
+        logger.log("Posts.js")
+        logger.log(response)
         this.setState({
           posts: response.data
         });
       },
       error => {
+        logger.log("Posts.js")
+        logger.error(error)
         const resMessage = (
           error.response &&
           error.response.data &&

@@ -5,7 +5,7 @@ import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import emailjs from "emailjs-com";
-import { SettingsInputAntennaTwoTone } from '@mui/icons-material';
+import logger from '../logger/logger'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -27,9 +27,11 @@ export default class ContactUs extends Component {
         e.preventDefault();
         emailjs.sendForm('service_j0crfxs', 'template_t4q1uil', e.target, 'z8MkSEH-sIePCOtQn')
             .then((result) => {
-                console.log(result.text);
+                logger.log("ContactUs.js")
+                logger.log(result.text);
             }, (error) => {
-                console.log(error.text);
+                logger.log("ContactUs.js")
+                logger.error(error.text);
             });
         e.target.reset()
     }

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { AppBar, Toolbar, Grid, Typography } from '@mui/material'
+import React from 'react';
+import { AppBar, Toolbar, Grid } from '@mui/material'
 import ButtonCustom from '../components/ButtonCustom'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
-import axios from 'axios';
 import authService from '../services/auth-service';
 import { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import userService from '../services/user-service';
+import logger from '../logger/logger'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -67,6 +65,8 @@ export default class Login extends Component {
               window.location.reload();
             },
             error => {
+              logger.log("Login.js")
+              logger.error(error)
               const resMessage = (
                 error.response &&
                 error.response.data &&
@@ -81,6 +81,8 @@ export default class Login extends Component {
             window.location.reload();
         },
         error => {
+          logger.log("Login.js")
+          logger.error(error)
           const resMessage = (
             error.response &&
             error.response.data &&

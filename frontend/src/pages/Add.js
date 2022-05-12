@@ -1,13 +1,12 @@
-import { Button, Card, CardHeader, CardMedia, CardContent, TextField, Grid, Box } from '@mui/material';
-import React, { useRef, useState, useEffect, Component } from 'react'
+import { Button, Card, CardHeader, CardContent, TextField, Grid } from '@mui/material';
+import React, { Component } from 'react'
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ButtonCustom from '../components/ButtonCustom'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import axios from 'axios';
 import Header from './Header'
 import postService from '../services/post-service';
+import logger from '../logger/logger';
 
 export default class Add extends Component {
     constructor(props) {
@@ -85,6 +84,12 @@ export default class Add extends Component {
         }
 
         if (this.state.title && this.state.description && this.state.fileName) {
+            logger.log("Add.js")
+            logger.log(this.state.title)
+            logger.log( this.state.description)
+            logger.log(this.state.file)
+            logger.log(this.state.fileName)
+
             postService.createPost(
                 this.state.title,
                 this.state.description,
@@ -97,6 +102,8 @@ export default class Add extends Component {
                     });
                 },
                 error => {
+                    logger.log("Add.js")
+                    logger.error(error)
                     const resMessage = (
                         error.response &&
                         error.response.data &&

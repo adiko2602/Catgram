@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
 import PostProfile from '../components/PostProfile'
-import Timeline from '../components/Timeline';
-import Friends from './Friends';
-import axios from 'axios'
 import EditIcon from '@mui/icons-material/Edit';
 import Header from './Header';
 import AvatarCustom from '../components/AvatarCustom';
-import { useState, useEffect } from "react";
-import { ImageList, ImageListItem, ImageListItemBar, Grid, CardHeader, Card, CardContent, Typography } from '@mui/material';
-import authService from '../services/auth-service';
-import ButtonCustom from '../components/ButtonCustom'
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { AppBar, Toolbar, IconButton, Button } from '@mui/material'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import { Grid, CardHeader, Card, Button } from '@mui/material';
+import logger from '../logger/logger'
 
+import authService from '../services/auth-service';
 import userService from '../services/user-service';
 import postService from '../services/post-service';
 
@@ -33,11 +24,15 @@ export default class Profile extends Component {
     componentDidMount() {
         postService.getCurrentPosts().then(
             response => {
+                logger.log("Profile.js")
+                logger.log(response)
                 this.setState({
                     currentPosts: response.data
                 });
             },
             error => {
+                logger.log("Profile.js")
+                logger.error(error)
                 const resMessage = (
                     error.response &&
                     error.response.data &&

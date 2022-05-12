@@ -10,6 +10,7 @@ import Header from './Header'
 import postService from '../services/post-service';
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
+import logger from '../logger/logger';
 
 export default class ProfileEdit extends Component {
     constructor(props) {
@@ -63,6 +64,11 @@ export default class ProfileEdit extends Component {
 
     handleUpdate(e) {
         e.preventDefault();
+        logger.log("ProfileEdit.js")
+        logger.log(this.state.currentProfile.userId)
+        logger.log(this.state.namexD)
+        logger.log(this.state.lastname)
+        logger.log(this.state.description)
         userService.update(
             this.state.currentProfile.userId,
             this.state.namexD,
@@ -70,6 +76,8 @@ export default class ProfileEdit extends Component {
             this.state.description
         ).then(
             response => {
+                logger.log("ProfileEdit.js")
+                logger.log(response)
                 this.setState({
                     message: response.data.message
                 });
@@ -80,6 +88,8 @@ export default class ProfileEdit extends Component {
                         });
                     },
                     error => {
+                        logger.log("ProfileEdit.js")
+                        logger.error(response)
                         const resMessage = (
                             error.response &&
                             error.response.data &&
@@ -92,7 +102,8 @@ export default class ProfileEdit extends Component {
                     });
             },
             error => {
-                console.log(error);
+                logger.log("ProfileEdit.js")
+                logger.error(error)    
                 const resMessage = (
                     error.response &&
                     error.response.data &&

@@ -1,13 +1,12 @@
-import React, { useState, Component } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { Component } from 'react';
 import { AppBar, Toolbar, Grid, Typography } from '@mui/material'
 import ButtonCustom from '../components/ButtonCustom'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
+import logger from '../logger/logger'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -80,12 +79,19 @@ export default class SignUp extends Component {
       loading: true
     });
 
+    
+    logger.log("SignUp.js")
+    logger.log(this.state.username)
+    logger.log(this.state.password)
+    logger.log(this.state.email)
+
     authService.register(
       this.state.username,
       this.state.password,
       this.state.email).then(
         response => {
-          console.log(response);
+          logger.log("SignUp.js")
+          logger.log(response)
           this.setState({
             message: response.data.message,
             successful: true,
@@ -97,7 +103,8 @@ export default class SignUp extends Component {
           )
         },
         error => {
-          console.log(error);
+          logger.log("SignUp.js")
+          logger.error(error);
           const resMessage = (
             error.response &&
             error.response.data &&
@@ -121,12 +128,19 @@ export default class SignUp extends Component {
           loading: true
         });
 
+        
+      logger.log("SignUp.js")
+      logger.log(this.state.name)
+      logger.log(this.state.lastname)
+      logger.log(this.state.description)
+
       userService.register(
         this.state.name,
         this.state.lastname,
         this.state.description).then(
           response => {
-            console.log(response);
+            logger.log("SignUp.js")
+            logger.log(response);
             this.setState({
               message: response.data.message,
               loading: false
@@ -136,6 +150,8 @@ export default class SignUp extends Component {
                     window.location.reload();
                   },
                   error => {
+                    logger.log("SignUp.js")
+                    logger.error(error)
                     const resMessage = (
                       error.response &&
                       error.response.data &&
@@ -147,9 +163,10 @@ export default class SignUp extends Component {
                       message: resMessage
                     });
                   });
-                  window.location.reload();
           },
           error => {
+            logger.log("SignUp.js")
+            logger.error(error)
             console.log(error);
             const resMessage = (
               error.response &&

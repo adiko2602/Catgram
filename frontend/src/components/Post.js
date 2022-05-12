@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link, Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button } from '@mui/material'
-import ButtonCustom from './ButtonCustom';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import postService from '../services/post-service';
+import { Card, CardHeader, CardMedia, CardContent, Typography } from '@mui/material'
+import logger from '../logger/logger';
 
 
 export default class Post extends Component {
@@ -11,7 +9,8 @@ export default class Post extends Component {
     }
 
     render() {
-        console.log(this.props.postId)
+        logger.log("Post.js");
+        logger.log(this.props);
         return (
             <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                 <CardHeader
