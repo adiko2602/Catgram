@@ -8,6 +8,7 @@ import authService from '../services/auth-service';
 import { Component } from 'react';
 import userService from '../services/user-service';
 import logger from '../logger/logger'
+import lang from 'i18next'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -78,7 +79,6 @@ export default class Login extends Component {
                 message: resMessage
               });
             });
-            window.location.reload();
         },
         error => {
           logger.log("Login.js")
@@ -118,9 +118,9 @@ export default class Login extends Component {
             direction="row"
             justifyContent="flex-end"
           >
-            <ButtonCustom link="/login" name="Login" icon={<LoginOutlinedIcon />} />
-            <ButtonCustom link="/sign-up" name="Sign Up" icon={<LockOpenOutlinedIcon />} />
-            <ButtonCustom link="/contact-us" name="Contact us" icon={<ContactMailOutlinedIcon />} />
+            <ButtonCustom link="/login" name={lang.t('login')} icon={<LoginOutlinedIcon />} />
+            <ButtonCustom link="/sign-up" name={lang.t('signup')} icon={<LockOpenOutlinedIcon />} />
+            <ButtonCustom link="/contact-us" name={lang.t('contactus')} icon={<ContactMailOutlinedIcon />} />
           </Grid>
         </Toolbar>
       </AppBar>
@@ -144,7 +144,7 @@ export default class Login extends Component {
                 <input
                   aria-label="Enter your Username"
                   type="text"
-                  placeholder="Username"
+                  placeholder={lang.t('login.formUsername')}
                   className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                   onChange={this.onChangeUsername}
                   value={this.state.username}
@@ -154,7 +154,7 @@ export default class Login extends Component {
                 <input
                   aria-label="Enter your password"
                   type="password"
-                  placeholder="Password"
+                  placeholder={lang.t('login.formPassword')}
                   className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                   onChange={this.onChangePassword}
                   value={this.state.password}
@@ -167,7 +167,7 @@ export default class Login extends Component {
                   className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                   onClick={()=>addDataIntoCache('Login Attempt','https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg','Background cache')}
                 >
-                  Login
+                  {lang.t('login')}
                   {this.state.loading && ("...")}
                 </button>
 
@@ -175,9 +175,9 @@ export default class Login extends Component {
             </div>
             <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
               <p className="text-sm">
-                Don't have an account?{` `}
+                {lang.t('login.getAccount')}{` `}
                 <a href="/sign-up" className="font-bold text-blue-medium">
-                  Sign up
+                  {lang.t('signup')}
                 </a>
               </p>
             </div>

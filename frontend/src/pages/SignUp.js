@@ -7,6 +7,7 @@ import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
 import logger from '../logger/logger'
+import lang from 'i18next'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -200,9 +201,9 @@ export default class SignUp extends Component {
             direction="row"
             justifyContent="flex-end"
           >
-            <ButtonCustom link="/login" name="Login" icon={<LoginOutlinedIcon />} />
-            <ButtonCustom link="/sign-up" name="Sign Up" icon={<LockOpenOutlinedIcon />} />
-            <ButtonCustom link="/contact-us" name="Contact us" icon={<ContactMailOutlinedIcon />} />
+            <ButtonCustom link="/login" name={lang.t('login')} icon={<LoginOutlinedIcon />} />
+            <ButtonCustom link="/sign-up" name={lang.t('signup')} icon={<LockOpenOutlinedIcon />} />
+            <ButtonCustom link="/contact-us" name={lang.t('contactus')} icon={<ContactMailOutlinedIcon />} />
           </Grid>
         </Toolbar>
       </AppBar>
@@ -222,27 +223,24 @@ export default class SignUp extends Component {
                 >
 
                   <input
-                    aria-label="Enter your name"
                     type="text"
-                    placeholder="Name"
+                    placeholder={lang.t('signup.formName')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangeName}
                     value={this.state.Name}
                   />
 
                   <input
-                    aria-label="Enter your lastname"
                     type="text"
-                    placeholder="Lastname"
+                    placeholder={lang.t('signup.formLastname')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangeLastname}
                     value={this.state.lastname}
                   />
 
                   <input
-                    aria-label="Enter description of you"
                     type="text"
-                    placeholder="Description"
+                    placeholder={lang.t('signup.formDescription')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangeDescription}
                     value={this.state.description}
@@ -251,7 +249,7 @@ export default class SignUp extends Component {
                     type="submit"
                     className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                   >
-                    Create Profile {this.state.loading && ("...")}
+                    {lang.t('signup.end')} {this.state.loading && ("...")}
                   </button>
                 </form>)}
               {!this.state.successful && <p className="mb-4 text-xs text-red-primary">{this.state.message}</p>}
@@ -261,9 +259,8 @@ export default class SignUp extends Component {
                 >
 
                   <input
-                    aria-label="Enter your username"
                     type="text"
-                    placeholder="Username"
+                    placeholder={lang.t('signup.formUsername')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangeUsername}
                     value={this.state.username}
@@ -271,38 +268,17 @@ export default class SignUp extends Component {
                   />
 
                   <input
-                    aria-label="Enter your email"
                     type="text"
-                    placeholder="Email"
+                    placeholder={lang.t('signup.formEmail')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangeEmail}
                     value={this.state.email}
                     disabled={this.state.successful}
                   />
 
-
-                  {/* <input
-                  aria-label="Enter your full name"
-                  type="text"
-                  placeholder="Full name"
-                  className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                  onChange={this.onChangePassword}
-                  value={fullName}
-                />
-                <input
-                  aria-label="Enter your email address"
-                  type="text"
-                  placeholder="Email address"
-                  className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                  onChange={({ target }) => setEmailAddress(target.value)}
-                  value={emailAddress}
-                /> */}
-
-
                   <input
-                    aria-label="Enter your password"
                     type="password"
-                    placeholder="Password"
+                    placeholder={lang.t('signup.formPassword')}
                     className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                     onChange={this.onChangePassword}
                     value={this.state.password}
@@ -312,16 +288,16 @@ export default class SignUp extends Component {
                     disabled={this.state.loading || this.state.successful}
                     type="submit"
                     className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
-                  >
-                    Sign Up {this.state.loading && ("...")}
+                    >
+                    {lang.t('signup')} {this.state.loading && ("...")}
                   </button>
                 </form>)}
             </div>
             <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
               <p className="text-sm">
-                Have an account?{` `}
+                {lang.t('signup.getLoginText')}{` `}
                 <a href="/login" className="font-bold text-blue-medium">
-                  Login
+                  {lang.t('login')}
                 </a>
               </p>
             </div>

@@ -6,6 +6,7 @@ import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import emailjs from "emailjs-com";
 import logger from '../logger/logger'
+import lang from 'i18next'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -63,9 +64,9 @@ export default class ContactUs extends Component {
                                 direction="row"
                                 justifyContent="flex-end"
                             >
-                                <ButtonCustom link="/login" name="Login" icon={<LoginOutlinedIcon />} />
-                                <ButtonCustom link="/sign-up" name="Sign Up" icon={<LockOpenOutlinedIcon />} />
-                                <ButtonCustom link="/contact-us" name="Contact us" icon={<ContactMailOutlinedIcon />} />
+                                <ButtonCustom link="/login" name={lang.t('login')} icon={<LoginOutlinedIcon />} />
+                                <ButtonCustom link="/sign-up" name={lang.t('signup')} icon={<LockOpenOutlinedIcon />} />
+                                <ButtonCustom link="/contact-us" name={lang.t('contactus')} icon={<ContactMailOutlinedIcon />} />
                             </Grid>
                         </Toolbar>
                     </AppBar>
@@ -75,10 +76,10 @@ export default class ContactUs extends Component {
                         <div className="flex flex-col w-3/5">
                             <div className="flex justify-center items-center flex-col w-full p-6 rounded text-white">
                                 <p className="text-medium">
-                                    Contact Page
+                                    {lang.t("contactUs.page")}
                                 </p>
                                 <p className="text-sub-sub">
-                                    If you would like to get in touch with us, press the button below to open the contact form.
+                                    {lang.t("contactUs.pageText")}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center p-2 mb-8 rounded">
@@ -87,7 +88,7 @@ export default class ContactUs extends Component {
                                     className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                                     onClick={this.handleClick}
                                 >
-                                    Contact us
+                                    {lang.t("contactus")}
                                 </button>
                             </div>
                         </div>
@@ -113,9 +114,9 @@ export default class ContactUs extends Component {
                                 direction="row"
                                 justifyContent="flex-end"
                             >
-                                <ButtonCustom link="/login" name="Login" icon={<LoginOutlinedIcon />} />
-                                <ButtonCustom link="/sign-up" name="Sign Up" icon={<LockOpenOutlinedIcon />} />
-                                <ButtonCustom link="/contact-us" name="Contact us" icon={<ContactMailOutlinedIcon />} />
+                                <ButtonCustom link="/login" name={lang.t("login")} icon={<LoginOutlinedIcon />} />
+                                <ButtonCustom link="/sign-up" name={lang.t("signup")} icon={<LockOpenOutlinedIcon />} />
+                                <ButtonCustom link="/contact-us" name={lang.t("contactus")} icon={<ContactMailOutlinedIcon />} />
                             </Grid>
                         </Toolbar>
                     </AppBar>
@@ -132,25 +133,22 @@ export default class ContactUs extends Component {
                                     onSubmit={this.sendEmail}
                                 >
                                     <input
-                                        aria-label="Enter your username"
                                         type="text"
-                                        placeholder="Full name"
+                                        placeholder={lang.t('contactUs.formName')}
                                         className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                                         name="name"
                                     />
 
 
                                     <input
-                                        aria-label="Enter your full name"
                                         type="text"
-                                        placeholder="Email address"
+                                        placeholder={lang.t('contactUs.formEmail')}
                                         className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                                         name="email"
                                     />
                                     <input
-                                        aria-label="Enter subject of the email"
                                         type="text"
-                                        placeholder="Subject"
+                                        placeholder={lang.t('contactUs.formSubject')}
                                         className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                                         name="subject"
                                     />
@@ -159,15 +157,16 @@ export default class ContactUs extends Component {
                                         aria-label="Enter the message"
                                         type="text"
                                         className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                                        id="" cols="30" rows="8"
-                                        placeholder="Message"
+                                        id="" cols="30" rows="5"
+                                        placeholder={lang.t("contactUs.formMessage")}
                                         name="message"
+                                        style = {{ resize: 'none', height: '100px'}}
                                     ></textarea>
                                     <button
                                         type="submit"
                                         className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                                     >
-                                        Send the form
+                                        {lang.t("contactUs.end")}
                                     </button>
                                 </form>
                             </div>

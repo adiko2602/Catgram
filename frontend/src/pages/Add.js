@@ -7,6 +7,7 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import Header from './Header'
 import postService from '../services/post-service';
 import logger from '../logger/logger';
+import lang from 'i18next'
 
 export default class Add extends Component {
     constructor(props) {
@@ -134,9 +135,9 @@ export default class Add extends Component {
                         style={{ minHeight: '100vh' }}
                     >
                         <Grid item xs={3}>
-                            <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
+                            <Card style={{ width: '650px', marginTop: '20px' }} elevation={5}>
                                 <CardHeader
-                                    title="Create new post"
+                                    title={lang.t('add.createTitle')}
                                 />
                                 <CardContent>
                                     {this.state.message && (
@@ -157,7 +158,7 @@ export default class Add extends Component {
                                                 startIcon={<AddPhotoAlternateOutlinedIcon />}
                                                 onClick={this.onClickSelectFile}
                                             >
-                                                Upload File
+                                                {lang.t('add.uploadFile')}
                                             </Button>
                                         )}
 
@@ -169,7 +170,7 @@ export default class Add extends Component {
                                                 startIcon={<AddPhotoAlternateOutlinedIcon />}
                                                 onClick={this.onClickSelectFile}
                                             >
-                                                File Selected
+                                                {lang.t('add.fileSelected')}
                                             </Button>
                                         )}
 
@@ -185,7 +186,7 @@ export default class Add extends Component {
                                         <TextField
                                             onChange={this.onChangeTitle}
                                             style={{ marginTop: '10px' }}
-                                            label="Title"
+                                            label={lang.t('add.formTitle')}
                                             variant="outlined"
                                             fullWidth
                                             required
@@ -195,8 +196,8 @@ export default class Add extends Component {
 
                                         <TextField
                                             onChange={this.onChangeDescription}
+                                            label={lang.t('add.formDescription')}
                                             style={{ marginTop: '10px' }}
-                                            label="Description"
                                             variant="outlined"
                                             fullWidth
                                             required
@@ -211,7 +212,7 @@ export default class Add extends Component {
                                             type="submit"
                                             variant="text"
                                             endIcon={<SendOutlinedIcon />}>
-                                            Submit
+                                            {lang.t('add.submit')}
                                         </Button>
 
 
@@ -238,10 +239,10 @@ export default class Add extends Component {
                         <Grid item xs={3}>
                             <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
                                 <CardHeader
-                                    title="New post was created"
+                                    title={lang.t('add.newTitle')}
                                 />
                                 <CardContent>
-                                    <ButtonCustom link="/Profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
+                                    <ButtonCustom link="/Profile" name={lang.t('profile')} icon={<AccountBoxOutlinedIcon />} />
                                 </CardContent>
                             </Card>
                         </Grid>

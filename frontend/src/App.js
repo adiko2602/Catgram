@@ -1,7 +1,7 @@
 import { createMuiTheme, ThemeProvider, Grid } from "@mui/material";
+import lang, { changeLanguage } from 'i18next'
+import { initReactI18next } from 'react-i18next'
 import { grey } from '@mui/material/colors';
-import Header from './pages/Header'
-import Friends from './pages/Friends'
 import Posts from './pages/Posts'
 import Add from './pages/Add'
 import Start from './pages/Start'
@@ -12,10 +12,23 @@ import Profile from './pages/Profile'
 import ProfileEdit from './pages/ProfileEdit'
 import NotFound from './pages/not-found'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import React, { Component } from 'react'
+import React, { Suspense, Component } from 'react'
 import authService from "./services/auth-service";
+import translationsPl from "./language/translationPl.json"
+import translationsEn from "./language/translationEn.json"
 
 
+lang
+  .use(initReactI18next)
+  .init( {
+    resources: {
+      pl: { translation: translationsPl },
+      en: { translation: translationsEn }
+    },
+    lng: 'pl',
+    fallbackLng: 'pl',
+    interpolation: { escapeValue: false }
+  });
 
 const theme = createMuiTheme({
   palette: {
@@ -38,13 +51,23 @@ const theme = createMuiTheme({
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.onChangeLanguage = this.onChangeLanguage.bind(this);
     this.state = {
-      loggedIn: authService.loggedIn()
+      loggedIn: authService.loggedIn(),
+      language: ""
     };
+    lang.changeLanguage(localStorage.getItem("lang"))
+  }
+
+  onChangeLanguage(e) {
+    e.preventDefault();
+    localStorage.setItem("lang", e.target.value)
+    window.location.reload();
   }
 
   render() {
     return(
+      <Suspense fallback="Loading..." >
       <>
       <ThemeProvider theme={theme}>
         <Router>
@@ -76,8 +99,14 @@ export default class App extends Component {
             <Route component={NotFound} />
           </Switch>
         </Router>
+        <select name="language" onChange={this.onChangeLanguage}>
+          <option value="pl">Polski</option>
+          <option value="en">English</option>
+          <option disabled selected>{lang.t('selectLang')}</option>
+        </select>
       </ThemeProvider>
     </>
+    </Suspense>
     );
   }
 }

@@ -4,6 +4,7 @@ import ButtonCustom from '../components/ButtonCustom'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+import lang from 'i18next'
 
 document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
 document.body.style.backgroundSize = "cover";
@@ -26,9 +27,9 @@ export default function Start() {
                     direction="row"
                     justifyContent="flex-end"
                 >
-                    <ButtonCustom link="/login" name="Login" icon={<LoginOutlinedIcon />} />
-                    <ButtonCustom link="/sign-up" name="Sign Up" icon={<LockOpenOutlinedIcon />} />
-                    <ButtonCustom link="/contact-us" name="Contact us" icon={<ContactMailOutlinedIcon />} />
+                    <ButtonCustom link="/login" name={lang.t('login')} icon={<LoginOutlinedIcon />} />
+                    <ButtonCustom link="/sign-up" name={lang.t('signup')} icon={<LockOpenOutlinedIcon />} />
+                    <ButtonCustom link="/contact-us" name={lang.t('contactus')} icon={<ContactMailOutlinedIcon />} />
                 </Grid>
             </Toolbar>
         </AppBar>
@@ -40,10 +41,11 @@ export default function Start() {
                 <div className="flex flex-col w-full">
                     <div className="flex justify-center items-center flex-col w-full p-4 rounded text-white">
                         <p className="text-main">
-                            Welcome to Catagram!
+                            {lang.t('start.welcome')}
                         </p>
                         <p className="text-sub">
-                            Fast-Growing community of creative cat loving owners.
+                            
+                        {lang.t('start.text')}
                         </p>
                     </div>
                 </div>

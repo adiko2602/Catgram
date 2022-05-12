@@ -11,6 +11,7 @@ import postService from '../services/post-service';
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
 import logger from '../logger/logger';
+import lang from 'i18next'
 
 export default class ProfileEdit extends Component {
     constructor(props) {
@@ -134,7 +135,7 @@ export default class ProfileEdit extends Component {
                             <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
 
                                 <CardHeader
-                                    title="Edit profile"
+                                    title={lang.t('editProfile.editTitle')}
                                 />
                                 <CardContent>
                                     <form onSubmit={this.handleUpdate}>
@@ -172,7 +173,7 @@ export default class ProfileEdit extends Component {
                                             type="submit"
                                             className={`bg-blue-medium text-white w-full rounded h-8 font-bold`}
                                         >
-                                            Update Profile
+                                            {lang.t('editProfle.submit')}
                                         </button>
                                     </form>
                                 </CardContent>
@@ -182,11 +183,11 @@ export default class ProfileEdit extends Component {
                         {this.state.updated && (
                             <Card style={{ width: '614px', marginTop: '20px' }} elevation={5}>
                                 <CardHeader
-                                    title="Profile updated."
+                                    title={lang.t('editProfile.newTitle')}
                                 />
                                 <CardContent>
 
-                                    <ButtonCustom link="/Profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
+                                    <ButtonCustom link="/Profile" name={lang.t('profile')} icon={<AccountBoxOutlinedIcon />} />
 
                             </CardContent>
                         </Card>

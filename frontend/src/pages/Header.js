@@ -6,6 +6,7 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
+import lang from 'i18next'
 import React, { Component } from 'react';
 
 
@@ -43,15 +44,15 @@ export default class Header extends Component {
                         direction="row"
                         justifyContent="flex-end"
                     >
-                        <ButtonCustom link="/" name="Home" icon={<HomeOutlinedIcon />} />
-                        <ButtonCustom link="/add" name="Add" icon={<AddBoxOutlinedIcon />} />
-                        <ButtonCustom link="/profile" name="Profile" icon={<AccountBoxOutlinedIcon />} />
+                        <ButtonCustom link="/" name={lang.t('home')} icon={<HomeOutlinedIcon />} />
+                        <ButtonCustom link="/add" name={lang.t('add')} icon={<AddBoxOutlinedIcon />} />
+                        <ButtonCustom link="/profile" name={lang.t('profile')} icon={<AccountBoxOutlinedIcon />} />
                         <Button 
                             onClick={this.handleLogout}
                             style={{ color: 'black', marginLeft: '0px' }} 
                             variant="text" 
                             startIcon={<LogoutOutlinedIcon />} >
-                                Logout
+                                {lang.t('logout')}
                         </Button>
                     </Grid>
                 </Toolbar>
