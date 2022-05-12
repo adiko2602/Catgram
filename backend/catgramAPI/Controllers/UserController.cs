@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace catgramAPI.Controllers
 {
@@ -16,6 +17,19 @@ namespace catgramAPI.Controllers
     {
         private IConfiguration _configuration;
         private IUserService _userService;
+
+         private readonly ILogger<HomeController> _logger;
+
+    public UserController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        _logger.LogInformation("Index page is initiated");
+        return View();
+    }
 
         public UserController(
             IUserService userService,
@@ -120,4 +134,5 @@ namespace catgramAPI.Controllers
             return Ok();
         }
     }
+    
 }
