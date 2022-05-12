@@ -1,5 +1,5 @@
-import { createMuiTheme, ThemeProvider, Grid } from "@mui/material";
-import lang, { changeLanguage } from 'i18next'
+import { ThemeProvider } from "@mui/material";
+import lang from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { grey } from '@mui/material/colors';
 import Posts from './pages/Posts'
@@ -13,6 +13,9 @@ import ProfileEdit from './pages/ProfileEdit'
 import NotFound from './pages/not-found'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import React, { Suspense, Component } from 'react'
+import { createTheme } from '@mui/material/styles'
+
+
 import authService from "./services/auth-service";
 import translationsPl from "./language/translationPl.json"
 import translationsEn from "./language/translationEn.json"
@@ -30,7 +33,7 @@ lang
     interpolation: { escapeValue: false }
   });
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: grey[100],
@@ -99,10 +102,10 @@ export default class App extends Component {
             <Route component={NotFound} />
           </Switch>
         </Router>
-        <select name="language" onChange={this.onChangeLanguage}>
+        <select defaultValue={'DEFAULT'} name="language" onChange={this.onChangeLanguage}>
           <option value="pl">Polski</option>
           <option value="en">English</option>
-          <option disabled selected>{lang.t('selectLang')}</option>
+          <option disabled value="DEFAULT">{lang.t('selectLang')} </option>
         </select>
       </ThemeProvider>
     </>
