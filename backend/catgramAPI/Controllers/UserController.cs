@@ -18,19 +18,6 @@ namespace catgramAPI.Controllers
         private IConfiguration _configuration;
         private IUserService _userService;
 
-         private readonly ILogger<HomeController> _logger;
-
-    public UserController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
-        _logger.LogInformation("Index page is initiated");
-        return View();
-    }
-
         public UserController(
             IUserService userService,
             IConfiguration configuration)
