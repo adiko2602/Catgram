@@ -7,6 +7,7 @@ import postService from '../services/post-service';
 import { Grid } from '@mui/material'
 import logger from '../logger/logger'
 
+
 export default class Posts extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +46,7 @@ export default class Posts extends Component {
   render() {
     return (
       <>
+      <div className='bg-image'>
         <Header />
         <Grid
       container
@@ -68,6 +70,7 @@ export default class Posts extends Component {
             ))}
           </Grid>
         </Grid>
+        </div>
       </>
     );
   }

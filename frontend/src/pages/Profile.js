@@ -7,9 +7,14 @@ import { Grid, CardHeader, Card, Button } from '@mui/material';
 import logger from '../logger/logger'
 
 
+
 import authService from '../services/auth-service';
 import userService from '../services/user-service';
 import postService from '../services/post-service';
+
+document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
+document.body.style.backgroundSize = "cover";
+
 
 export default class Profile extends Component {
     constructor(props) {

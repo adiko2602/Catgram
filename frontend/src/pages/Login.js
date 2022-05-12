@@ -10,8 +10,8 @@ import userService from '../services/user-service';
 import logger from '../logger/logger'
 import lang from 'i18next'
 
-document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
-document.body.style.backgroundSize = "cover";
+// document.body.style.backgroundImage = "url(https://www.superiorwallpapers.com/cats/a-sweet-and-serious-cat-with-collar_2560x1440.jpg)";
+// document.body.style.backgroundSize = "cover";
 
 const addDataIntoCache = (cacheName, url, response) => {
   const data = new Response(JSON.stringify(response));
